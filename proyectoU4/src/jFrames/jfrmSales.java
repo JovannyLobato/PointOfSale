@@ -214,16 +214,6 @@ public class jfrmSales extends javax.swing.JFrame {
 
     private void tfQuantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantityKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            tfQuantity.setText("");
-            tfProductCode.requestFocusInWindow();
-            
-            product = productsDAO.read(tfProductCode.getText());
-            modProductDetails productDetails = new modProductDetails(); 
-            productDetails.setProductCode(product.getProductCode());
-            productDetails.setNam(product.getNam());
-            productDetails.setPrice(product.getPrice());
-            productDetails.setQuantity(Integer.parseInt(tfQuantity.getText()));
-            
             String productCode = tfProductCode.getText().trim();
             String quantityText = tfQuantity.getText().trim();
             if (productCode.isEmpty()) {
@@ -243,19 +233,35 @@ public class jfrmSales extends javax.swing.JFrame {
                 }
             }
             
-            addProductToTable(productCode, quantity);
+            
+            product = productsDAO.read(tfProductCode.getText());
+            modProductDetails productDetails = new modProductDetails(); 
+            productDetails.setProductCode(product.getProductCode());
+            productDetails.setNam(product.getNam());
+            productDetails.setPrice(product.getPrice());
+            productDetails.setQuantity(Integer.parseInt(tfQuantity.getText()));
+            if( product.getQuantityAvailable()<productDetails.getQuantity() ){
+                    JOptionPane.showMessageDialog(this, 
+                    "Insufficient stock. The quantity exceeds the available stock. Available stock: " 
+                    + product.getQuantityAvailable(), 
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                    tfQuantity.requestFocusInWindow();
+                    return;                
+            } 
+            
+            tfProductCode.requestFocusInWindow();
+            addProductToTable(productDetails);
             tfProductCode.setText("");
             tfQuantity.setText("");
-
             tfProductCode.requestFocusInWindow();
-            
         }
     }//GEN-LAST:event_tfQuantityKeyPressed
     
-    private void addProductToTable(String productCode, int quantity) {
+    private void addProductToTable(modProductDetails pd) {
         try {
-            String productName = "Sample Product"; 
-            double price = 20.0;
+            String productName = pd.getNam(); 
+            double price = pd.getPrice();
+            int quantity = pd.getQuantity();
             double total = price * quantity;
             
             model.addRow(new Object[]{productName, price, quantity, total});
