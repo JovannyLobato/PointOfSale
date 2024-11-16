@@ -257,9 +257,7 @@ public class jfrmSales extends javax.swing.JFrame {
             
             tfProductCode.requestFocusInWindow();
             addProductToTable(productDetails);
-            tfProductCode.setText("");
-            tfQuantity.setText("");
-            tfProductCode.requestFocusInWindow();
+
         }
     }//GEN-LAST:event_tfQuantityKeyPressed
     
@@ -275,7 +273,17 @@ public class jfrmSales extends javax.swing.JFrame {
             for (int i = 0; i < model.getRowCount(); i++) {
                 String existingCode = (String) model.getValueAt(i, 0);
                 if (existingCode.equals(productCode)) {
-                    int existingQuantity = (int) model.getValueAt(i, 2);
+                    Object existingValue = model.getValueAt(i, 2);
+                    int existingQuantity;
+                    if (existingValue instanceof Integer) {
+                        existingQuantity = (Integer) existingValue;
+                    } else if (existingValue instanceof String) {
+                        existingQuantity = Integer.parseInt((String) existingValue);
+                    } else if (existingValue instanceof Double) {
+                        existingQuantity = ((Double) existingValue).intValue();
+                    } else {
+                        throw new IllegalArgumentException("Unexpected type in quantity column: " + existingValue.getClass().getName());
+                    }
                     int newQuantity = existingQuantity + quantity;
                     model.setValueAt(newQuantity, i, 2);
                     model.setValueAt(price * newQuantity, i, 3);
@@ -287,6 +295,9 @@ public class jfrmSales extends javax.swing.JFrame {
                 model.addRow(new Object[]{productCode, productName, price, quantity, total});
             }
             model.fireTableDataChanged();
+            tfProductCode.setText("");
+            tfQuantity.setText("");
+            tfProductCode.requestFocusInWindow();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error adding the product: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
