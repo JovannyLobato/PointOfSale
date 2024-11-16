@@ -8,7 +8,7 @@ package modelos;
  *
  * @author jovan
  */
-public class modProductDetail {
+public class modProductDetails {
     private String productCode;
     private String nam;
     private double price;

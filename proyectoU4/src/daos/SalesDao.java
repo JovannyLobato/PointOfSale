@@ -24,7 +24,7 @@ public class SalesDao {
     public boolean create(){
         return true;
     }
-    
+    /*
     public ArrayList<modSales> read(int orderNumber) {
     ArrayList<modSales> list = new ArrayList<modSales>();
     try {
@@ -50,11 +50,12 @@ public class SalesDao {
         ps = null;
         cx.desconectar();
         
-    } catch (SQLException ex) {
-        Logger.getLogger(SalesDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(SalesDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
-    return list;
-}
+    */
     
     public modSales read1(int idOrdenes){
         modSales sale=new modSales();

@@ -296,10 +296,10 @@ public class jfrmProductInventory extends javax.swing.JFrame {
         list = productsDAO.read(); 
         for (modProduct product : list) {
             Object fila[] = new Object[4];
-            fila[0] = product.getProductCode(); // Código del producto
-            fila[1] = product.getNam();        // Nombre del producto
-            fila[2] = product.getPrice();       // Precio del producto
-            fila[3] = product.getQuantityAvailable(); // Cantidad disponible
+            fila[0] = product.getProductCode();
+            fila[1] = product.getNam();        
+            fila[2] = product.getPrice();    
+            fila[3] = product.getQuantityAvailable();
             model.addRow(fila);
         }
         tblProducts.setModel(model); 

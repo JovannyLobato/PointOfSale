@@ -1,5 +1,6 @@
 package jFrames;
 
+import daos.ProductDAO;
 import daos.SalesDao;
 import java.util.ArrayList;
 import javax.swing.JFrame;
@@ -14,6 +15,8 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import modelos.modProduct;
+import modelos.modProductDetails;
 import modelos.modUser;
                     
 
@@ -23,10 +26,11 @@ import modelos.modUser;
  */
 public class jfrmSales extends javax.swing.JFrame {
     private jfrmMenu menuFrame;
+    ProductDAO productsDAO = new ProductDAO(); 
     DefaultTableModel model = new DefaultTableModel();
-    SalesDao SalesDAO = new SalesDao();
-    ArrayList<modProductDetail> lista;
-    
+    ProductDAO productdao = new ProductDAO();
+    ArrayList<modProductDetails> list;
+    modProduct product = new modProduct();
     Conexion cx;
     
     // Este metodo no sirve de nada, lo puso mane
@@ -212,7 +216,15 @@ public class jfrmSales extends javax.swing.JFrame {
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             tfQuantity.setText("");
             tfProductCode.requestFocusInWindow();
-            String productCode = tfProductCode.getText().trim(); 
+            
+            product = productsDAO.read(tfProductCode.getText());
+            modProductDetails productDetails = new modProductDetails(); 
+            productDetails.setProductCode(product.getProductCode());
+            productDetails.setNam(product.getNam());
+            productDetails.setPrice(product.getPrice());
+            productDetails.setQuantity(Integer.parseInt(tfQuantity.getText()));
+            
+            String productCode = tfProductCode.getText().trim();
             String quantityText = tfQuantity.getText().trim();
             if (productCode.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please enter the product code", "Error", JOptionPane.ERROR_MESSAGE);
@@ -245,6 +257,7 @@ public class jfrmSales extends javax.swing.JFrame {
             String productName = "Sample Product"; 
             double price = 20.0;
             double total = price * quantity;
+            
             model.addRow(new Object[]{productName, price, quantity, total});
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error adding the product: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
