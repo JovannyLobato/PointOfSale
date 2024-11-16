@@ -10,6 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;                    
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import modelos.modUser;
                     
 
@@ -21,7 +25,8 @@ public class jfrmSales extends javax.swing.JFrame {
     private jfrmMenu menuFrame;
     DefaultTableModel model = new DefaultTableModel();
     SalesDao SalesDAO = new SalesDao();
-    ArrayList<modSales> lista;
+    ArrayList<modProductDetail> lista;
+    
     Conexion cx;
     
     // Este metodo no sirve de nada, lo puso mane
@@ -30,6 +35,8 @@ public class jfrmSales extends javax.swing.JFrame {
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
+        
+        ((AbstractDocument) tfProductCode.getDocument()).setDocumentFilter(new NumericDocumentFilter());
         
         lblUser.setText(modUser.getInstance().getUsername() + modUser.getInstance().getLastName());
         
@@ -44,7 +51,7 @@ public class jfrmSales extends javax.swing.JFrame {
         
         
         jfrmLogin empleado = new jfrmLogin();
-        txtCliente.setEnabled(false);
+        //txtCliente.setEnabled(false);
         this.setLocationRelativeTo(null);
         model.addColumn("No.Orden");
         model.addColumn("Producto");
@@ -62,6 +69,8 @@ public class jfrmSales extends javax.swing.JFrame {
         setUndecorated(true);
         initComponents();
         
+        ((AbstractDocument) tfProductCode.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+        ((AbstractDocument) tfQuantity.getDocument()).setDocumentFilter(new NumericDocumentFilter());
         lblUser.setText(modUser.getInstance().getUsername() + " " + modUser.getInstance().getLastName());
         
         Timer timer = new Timer(1000, new ActionListener() {
@@ -74,14 +83,12 @@ public class jfrmSales extends javax.swing.JFrame {
         timer.start();
         
         jfrmLogin empleado = new jfrmLogin();
-        txtCliente.setEnabled(false);
+        //txtCliente.setEnabled(false);
         this.setLocationRelativeTo(null);
-        model.addColumn("No.Orden");
-        model.addColumn("Producto");
-        model.addColumn("Precio");
-        model.addColumn("Cantidad");
-        model.addColumn("Descuento");
-        model.addColumn("Cliente");
+        model.addColumn("Product");
+        model.addColumn("Price");
+        model.addColumn("Quantity");
+        model.addColumn("Total");
         cx = new Conexion();
         actualizarTabla(0);
     }
@@ -94,23 +101,13 @@ public class jfrmSales extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         btnBackToMenu = new javax.swing.JButton();
         lblUser = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCompras = new javax.swing.JTable();
-        btnAgregar = new javax.swing.JButton();
-        btnBorrar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
-        btnCobrar = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        txtTotal = new javax.swing.JTextField();
-        txtSutotal = new javax.swing.JTextField();
-        txtDescuento = new javax.swing.JTextField();
-        txtCliente = new javax.swing.JTextField();
         lblTime = new javax.swing.JLabel();
         tfProductCode = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        tfQuantity = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(660, 540));
@@ -139,9 +136,6 @@ public class jfrmSales extends javax.swing.JFrame {
         lblUser.setText("Vendedor:");
         getContentPane().add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 190, -1));
 
-        jLabel2.setText("Cliente:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
-
         tblCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -156,41 +150,6 @@ public class jfrmSales extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblCompras);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 440, 250));
-
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, -1, -1));
-
-        btnBorrar.setText("Borrar");
-        getContentPane().add(btnBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, -1, -1));
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 420, -1, -1));
-
-        btnCobrar.setText("Cobrar");
-        getContentPane().add(btnCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
-
-        jLabel4.setText("Subtotal:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, 50, -1));
-
-        jLabel5.setText("Total:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 440, -1, -1));
-
-        jLabel6.setText("Descuento:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 410, -1, -1));
-        getContentPane().add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 80, -1));
-        getContentPane().add(txtSutotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 80, -1));
-        getContentPane().add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 410, 80, -1));
-        getContentPane().add(txtCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 160, -1));
 
         lblTime.setText("date and hour");
         getContentPane().add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
@@ -210,6 +169,16 @@ public class jfrmSales extends javax.swing.JFrame {
         jLabel1.setText("Product Code");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
 
+        jLabel2.setText("Quantity");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
+
+        tfQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfQuantityKeyPressed(evt);
+            }
+        });
+        getContentPane().add(tfQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 60, 30));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -225,28 +194,67 @@ public class jfrmSales extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnBackToMenuActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-    }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     private void tfProductCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProductCodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfProductCodeActionPerformed
 
     private void tfProductCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfProductCodeKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-        System.out.println("Enter presionado");
+            System.out.println("Enter presionado");
 
-        String productCode = tfProductCode.getText();
-        System.out.println("Código del producto: " + productCode);
-    }
+            String productCode = tfProductCode.getText();
+            System.out.println("Código del producto: " + productCode);
+            tfQuantity.requestFocusInWindow();
+        }
     }//GEN-LAST:event_tfProductCodeKeyPressed
+
+    private void tfQuantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantityKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            tfQuantity.setText("");
+            tfProductCode.requestFocusInWindow();
+            String productCode = tfProductCode.getText().trim(); 
+            String quantityText = tfQuantity.getText().trim();
+            if (productCode.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter the product code", "Error", JOptionPane.ERROR_MESSAGE);
+                tfProductCode.requestFocusInWindow();
+                return;
+            }
+            int quantity=1;
+            if (!quantityText.isEmpty()) {
+                try {
+                    quantity = Integer.parseInt(quantityText);
+                    if (quantity <= 0) throw new NumberFormatException();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Invalid quantity. It must be a positive integer.", "Error", JOptionPane.ERROR_MESSAGE);
+                    tfQuantity.requestFocusInWindow();
+                    return;
+                }
+            }
+            
+            addProductToTable(productCode, quantity);
+            tfProductCode.setText("");
+            tfQuantity.setText("");
+
+            tfProductCode.requestFocusInWindow();
+            
+        }
+    }//GEN-LAST:event_tfQuantityKeyPressed
+    
+    private void addProductToTable(String productCode, int quantity) {
+        try {
+            String productName = "Sample Product"; 
+            double price = 20.0;
+            double total = price * quantity;
+            model.addRow(new Object[]{productName, price, quantity, total});
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error adding the product: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    
     
     public void actualizarTabla(int numOrden) {
+        /*CODIGO DE MANE por favor ignorar
         while (model.getRowCount() > 0) {
             model.removeRow(0);
         }
@@ -262,7 +270,31 @@ public class jfrmSales extends javax.swing.JFrame {
             model.addRow(fila);
         }
         tblCompras.setModel(model);
+        */
     }
+    
+    
+    class NumericDocumentFilter extends DocumentFilter {
+    @Override
+    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+        if (string != null && string.matches("\\d*")) { // Solo números
+            super.insertString(fb, offset, string, attr);
+        }
+    }
+
+    @Override
+    public void replace(FilterBypass fb, int offset, int length, String string, AttributeSet attr) throws BadLocationException {
+        if (string != null && string.matches("\\d*")) { // Solo números
+            super.replace(fb, offset, length, string, attr);
+        }
+    }
+
+    @Override
+    public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
+        super.remove(fb, offset, length);
+    }
+}
+    
     
     private String getCurrentDateTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -303,26 +335,16 @@ public class jfrmSales extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBackToMenu;
-    private javax.swing.JButton btnBorrar;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCobrar;
     private javax.swing.JButton btnExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblUser;
     private javax.swing.JTable tblCompras;
     private javax.swing.JTextField tfProductCode;
-    private javax.swing.JTextField txtCliente;
-    private javax.swing.JTextField txtDescuento;
-    private javax.swing.JTextField txtSutotal;
-    private javax.swing.JTextField txtTotal;
+    private javax.swing.JTextField tfQuantity;
     // End of variables declaration//GEN-END:variables
 }
