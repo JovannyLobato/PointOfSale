@@ -15,6 +15,13 @@ public class modProduct {
     private int quantityAvailable;
 
     
+    public boolean isEmpty() {
+        return (productCode == null || productCode.isEmpty()) 
+            || (nam == null || nam.isEmpty()) 
+            || price <= 0 
+            || quantityAvailable < 0;
+    }
+    
     public String getProductCode() {
         return productCode;
     }

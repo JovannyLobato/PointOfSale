@@ -26,13 +26,14 @@ import modelos.modUser;
  */
 public class jfrmSales extends javax.swing.JFrame {
     private jfrmMenu menuFrame;
+    
     ProductDAO productsDAO = new ProductDAO(); 
     DefaultTableModel model = new DefaultTableModel();
     ProductDAO productdao = new ProductDAO();
     ArrayList<modProductDetails> list;
     modProduct product = new modProduct();
     Conexion cx;
-    
+    int i =2;
     // Este metodo no sirve de nada, lo puso mane
     public jfrmSales(){
         setTitle("Sales");
@@ -94,7 +95,6 @@ public class jfrmSales extends javax.swing.JFrame {
         model.addColumn("Quantity");
         model.addColumn("Total");
         cx = new Conexion();
-        actualizarTabla(0);
     }
 
     @SuppressWarnings("unchecked")
@@ -204,10 +204,6 @@ public class jfrmSales extends javax.swing.JFrame {
 
     private void tfProductCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfProductCodeKeyPressed
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            System.out.println("Enter presionado");
-
-            String productCode = tfProductCode.getText();
-            System.out.println("Código del producto: " + productCode);
             tfQuantity.requestFocusInWindow();
         }
     }//GEN-LAST:event_tfProductCodeKeyPressed
@@ -235,12 +231,19 @@ public class jfrmSales extends javax.swing.JFrame {
             
             
             product = productsDAO.read(tfProductCode.getText());
+            
+            if (product.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Product not found or invalid data.", "Error", JOptionPane.ERROR_MESSAGE);
+                return; 
+            }
+            
             modProductDetails productDetails = new modProductDetails(); 
             productDetails.setProductCode(product.getProductCode());
             productDetails.setNam(product.getNam());
             productDetails.setPrice(product.getPrice());
-            productDetails.setQuantity(Integer.parseInt(tfQuantity.getText()));
+            productDetails.setQuantity(quantity);
             if( product.getQuantityAvailable()<productDetails.getQuantity() ){
+                    //System.out.println(product.getQuantityAvailable());
                     JOptionPane.showMessageDialog(this, 
                     "Insufficient stock. The quantity exceeds the available stock. Available stock: " 
                     + product.getQuantityAvailable(), 
@@ -263,8 +266,10 @@ public class jfrmSales extends javax.swing.JFrame {
             double price = pd.getPrice();
             int quantity = pd.getQuantity();
             double total = price * quantity;
-            
             model.addRow(new Object[]{productName, price, quantity, total});
+            refreshTable(pd);
+            //model.fireTableRowsInserted(model.getRowCount() - 1, model.getRowCount() - 1);
+            //model.fireTableDataChanged();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error adding the product: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -272,24 +277,16 @@ public class jfrmSales extends javax.swing.JFrame {
     
     
     
-    public void actualizarTabla(int numOrden) {
-        /*CODIGO DE MANE por favor ignorar
-        while (model.getRowCount() > 0) {
-            model.removeRow(0);
+    public void refreshTable(modProductDetails pd) {
+        try {
+            model.setValueAt(pd.getNam(), i, 0); 
+            model.setValueAt(pd.getPrice(), i, 1);
+            model.setValueAt(pd.getQuantity(), i, 2); 
+            model.setValueAt(pd.getPrice() * pd.getQuantity(), i, 3);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error updating the table: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        lista = SalesDAO.read(numOrden);
-        for (modSales sales : lista) {
-            Object fila[] = new Object[6];
-            fila[0] = sales.getNumOrden();
-            fila[1] = sales.getNombreProducto();
-            fila[2] = sales.getPrecio();
-            fila[3] = sales.getCantidad();
-            fila[4] = sales.getDescuento();
-            fila[5] = sales.getIdCliente();
-            model.addRow(fila);
-        }
-        tblCompras.setModel(model);
-        */
+        i++;
     }
     
     
