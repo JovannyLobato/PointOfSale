@@ -27,7 +27,7 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     private CustomerDAO customerDAO = new CustomerDAO();
     modCustomer customer;
-
+    int i = -1;
     public jfrmCustomerCRUD(jfrmMenu menuFrame) {
         this.menuFrame = menuFrame;
         setUndecorated(true);
@@ -35,7 +35,7 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         
         this.setLocationRelativeTo(null);
         
-        model.addColumn("Customer ID");        
+        model.addColumn("Customer ID");
         model.addColumn("Name");
         model.addColumn("Last Name");
         model.addColumn("Address");
@@ -47,6 +47,7 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         this.menuFrame = menuFrame;
         refreshTable();
     }
+    public jfrmCustomerCRUD(){}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,6 +122,11 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCustomersMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCustomers);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, 240));
@@ -229,7 +235,7 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         });
         jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, -1, -1));
 
-        btnDeleteCustomer.setText("Delete Employee");
+        btnDeleteCustomer.setText("Delete Customer");
         btnDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteCustomerActionPerformed(evt);
@@ -308,8 +314,8 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void btnModifyCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyCustomerActionPerformed
+
         customer.setCustomerID(tfCustomerID.getText());
-   
         customer.setNam(tfNam.getText());
         customer.setSurname(tfSurname.getText());
         customer.setAddress(tfAddress.getText());
@@ -317,12 +323,15 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         customer.setCity(tfCity.getText());
         customer.setPhone(tfPhone.getText());
         customer.setEmail(tfEmail.getText());
-        if (customerdao.update(customer)) {
-            JOptionPane.showMessageDialog(this, "Customer details updated successfully.");
+
+        String update = customerdao.update(customer);
+
+        if (update.equals("Update successful")) {
             refreshTable();
+            JOptionPane.showMessageDialog(this, "Customer details updated successfully.");
             clean();
         } else {
-            JOptionPane.showMessageDialog(this, "An error occurred while updating the customer details.");
+            JOptionPane.showMessageDialog(this, update);
         }
     }//GEN-LAST:event_btnModifyCustomerActionPerformed
 
@@ -337,14 +346,15 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         tfEmail.setText("");
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    
     private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
         if (i > -1) {
-            int res = JOptionPane.showConfirmDialog(this, "are you sure that you wanna delete this employee?", "DELETE", JOptionPane.YES_NO_OPTION);
+            int res = JOptionPane.showConfirmDialog(this, "are you sure that you wanna delete this customer?", "DELETE", JOptionPane.YES_NO_OPTION);
             if (res == 0) {
-                if (employeesdao.delete(lista.get(i).getEmployeeID())) {
+                if (customerdao.delete(list.get(i).getCustomerID())) {
                     JOptionPane.showMessageDialog(this, "Employee deleted succesfull!");
                 } else {
-                    JOptionPane.showMessageDialog(this, "An error was ocurred while deleting this employee");
+                    JOptionPane.showMessageDialog(this, "An error was ocurred while deleting this customer");
                 }
                 refreshTable();
                 clean();
@@ -352,6 +362,20 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDeleteCustomerActionPerformed
 
+    private void tblCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCustomersMouseClicked
+        i = tblCustomers.getSelectedRow();
+        customer = customerdao.read(list.get(i).getCustomerID());
+        tfCustomerID.setText(customer.getCustomerID());
+        tfNam.setText(customer.getNam()); 
+        tfSurname.setText(customer.getSurname());
+        tfAddress.setText(customer.getAddress());
+        tfPostalCode.setText(customer.getPostalCode());
+        tfCity.setText(customer.getCity());
+        tfPhone.setText(customer.getPhone());
+        tfEmail.setText(customer.getEmail());
+    }//GEN-LAST:event_tblCustomersMouseClicked
+
+    
     public void refreshTable(){
         while (model.getRowCount() > 0){
             model.removeRow(0);

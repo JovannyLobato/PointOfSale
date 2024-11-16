@@ -26,34 +26,7 @@ create table customers (
     phone char(12) not null,
     email varchar(50) not null
 );
-/*
-create table products (
-    ProductCode char(12) primary key,
-    name varchar(40) not null,
-    price decimal(6,2) not null,
-    quantityAvailable int not null
-);
 
-create table orders (
-    OrderID int primary key auto_increment,
-    orderNumber int,
-    productName varchar(40),
-    price decimal(6,2) not null,    
-    quantity tinyint not null,
-    total decimal(6,2) not null,
-    date datetime,
-    EmployeeID char(10),
-    constraint fk_EmployeeID foreign key (EmployeeID)
-    references employees(EmployeeID),
-    CustomerID char(10),
-    constraint fk_CustomerID foreign key (CustomerID)
-    references customers(CustomerID),
-    ProductCode char(12),
-    constraint fk_ProductCode foreign key (ProductCode)
-    references products(ProductCode)
-);
-*/
--- Tabla de órdenes
 CREATE TABLE orders (
     OrderID INT PRIMARY KEY AUTO_INCREMENT,
     orderNumber INT,
@@ -68,8 +41,8 @@ CREATE TABLE orders (
 
 -- Tabla de productos
 CREATE TABLE products (
-    ProductCode CHAR(12) PRIMARY KEY,
-    name VARCHAR(40) NOT NULL,
+    ProductCode CHAR(12) PRIMARY KEY unique,
+    nam VARCHAR(40) NOT NULL,
     price DECIMAL(6,2) NOT NULL,
     quantityAvailable INT NOT NULL
 );
@@ -127,11 +100,19 @@ insert into products values("779284102947","Sabritas",13.00,400);
 
 
 
+Alter table products
+change column name nam varchar(40) not null;
+describe products;
 
 
 
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM products;
+SET SQL_SAFE_UPDATES = 1;
 
 
+use pointOfSale;
+select * from products;
 -- ESTO NO LO EJECUTES
 drop database pointOfSale;
 use pointOfSale;

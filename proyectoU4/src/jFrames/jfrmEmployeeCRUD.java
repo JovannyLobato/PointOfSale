@@ -174,10 +174,10 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         tfNombre.setToolTipText("nombre");
         jPanel1.add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 70, -1));
 
-        jLabel2.setText("Employee iD");
+        jLabel2.setText("*Employee iD");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 20));
 
-        jLabel3.setText("Name");
+        jLabel3.setText("*Name");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
 
         tfApellido.setToolTipText("Last Name");
@@ -189,10 +189,10 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         pfPass1.setToolTipText("insert Password");
         jPanel1.add(pfPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 70, -1));
 
-        jLabel5.setText("Password");
+        jLabel5.setText("*Password");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
-        jLabel6.setText("Insert password again");
+        jLabel6.setText("*Insert password again");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
         pfPass2.setToolTipText("insert Password again");
@@ -211,7 +211,7 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
         jPanel1.add(tfPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 70, -1));
 
-        jLabel10.setText("phone number");
+        jLabel10.setText("*phone number");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
 
         tfCiudad.setToolTipText("city");
@@ -221,7 +221,7 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
         jPanel1.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 70, -1));
 
-        jLabel12.setText("E mail");
+        jLabel12.setText("*E mail");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
 
         btnCancel.setText("Cancel");

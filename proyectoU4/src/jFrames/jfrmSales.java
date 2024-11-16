@@ -200,6 +200,11 @@ public class jfrmSales extends javax.swing.JFrame {
                 tfProductCodeActionPerformed(evt);
             }
         });
+        tfProductCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfProductCodeKeyPressed(evt);
+            }
+        });
         getContentPane().add(tfProductCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 70, -1));
 
         jLabel1.setText("Product Code");
@@ -221,8 +226,7 @@ public class jfrmSales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackToMenuActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        jfrmAddSale nueva = new jfrmAddSale();
-        nueva.setVisible(true);
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -232,6 +236,15 @@ public class jfrmSales extends javax.swing.JFrame {
     private void tfProductCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProductCodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfProductCodeActionPerformed
+
+    private void tfProductCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfProductCodeKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+        System.out.println("Enter presionado");
+
+        String productCode = tfProductCode.getText();
+        System.out.println("Código del producto: " + productCode);
+    }
+    }//GEN-LAST:event_tfProductCodeKeyPressed
     
     public void actualizarTabla(int numOrden) {
         while (model.getRowCount() > 0) {
