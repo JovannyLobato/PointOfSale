@@ -33,15 +33,16 @@ public class jfrmSales extends javax.swing.JFrame {
     ArrayList<modProductDetails> list;
     modProduct product = new modProduct();
     Conexion cx;
-    int i =2;
+    int j =2;
     // Este metodo no sirve de nada, lo puso mane
+    /*
     public jfrmSales(){
         setTitle("Sales");
         setUndecorated(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
         
-        ((AbstractDocument) tfProductCode.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+        ((AbstractDocument) tfProductCode.getDocument()).s      etDocumentFilter(new NumericDocumentFilter());
         
         lblUser.setText(modUser.getInstance().getUsername() + modUser.getInstance().getLastName());
         
@@ -67,6 +68,7 @@ public class jfrmSales extends javax.swing.JFrame {
         cx = new Conexion();
         actualizarTabla(0);
     }
+    */
     
     public jfrmSales(jfrmMenu menuFrame) {
         this.menuFrame = menuFrame;
@@ -94,9 +96,10 @@ public class jfrmSales extends javax.swing.JFrame {
         model.addColumn("Price");
         model.addColumn("Quantity");
         model.addColumn("Total");
+        tblCompras.setModel(model);
         cx = new Conexion();
     }
-
+    public jfrmSales() {}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -262,14 +265,28 @@ public class jfrmSales extends javax.swing.JFrame {
     
     private void addProductToTable(modProductDetails pd) {
         try {
+            String productCode = pd.getProductCode();
             String productName = pd.getNam(); 
             double price = pd.getPrice();
             int quantity = pd.getQuantity();
             double total = price * quantity;
-            model.addRow(new Object[]{productName, price, quantity, total});
-            refreshTable(pd);
-            //model.fireTableRowsInserted(model.getRowCount() - 1, model.getRowCount() - 1);
-            //model.fireTableDataChanged();
+            
+            boolean exists = false;
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String existingCode = (String) model.getValueAt(i, 0);
+                if (existingCode.equals(productCode)) {
+                    int existingQuantity = (int) model.getValueAt(i, 2);
+                    int newQuantity = existingQuantity + quantity;
+                    model.setValueAt(newQuantity, i, 2);
+                    model.setValueAt(price * newQuantity, i, 3);
+                    exists = true;
+                    break;
+                }
+            }
+            if (!exists) {
+                model.addRow(new Object[]{productCode, productName, price, quantity, total});
+            }
+            model.fireTableDataChanged();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error adding the product: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -277,17 +294,6 @@ public class jfrmSales extends javax.swing.JFrame {
     
     
     
-    public void refreshTable(modProductDetails pd) {
-        try {
-            model.setValueAt(pd.getNam(), i, 0); 
-            model.setValueAt(pd.getPrice(), i, 1);
-            model.setValueAt(pd.getQuantity(), i, 2); 
-            model.setValueAt(pd.getPrice() * pd.getQuantity(), i, 3);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error updating the table: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        i++;
-    }
     
     
     class NumericDocumentFilter extends DocumentFilter {
