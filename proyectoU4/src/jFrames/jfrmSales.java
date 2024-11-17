@@ -92,6 +92,7 @@ public class jfrmSales extends javax.swing.JFrame {
         jfrmLogin empleado = new jfrmLogin();
         //txtCliente.setEnabled(false);
         this.setLocationRelativeTo(null);
+        model.addColumn("COde");
         model.addColumn("Product");
         model.addColumn("Price");
         model.addColumn("Quantity");
@@ -285,8 +286,8 @@ public class jfrmSales extends javax.swing.JFrame {
                         throw new IllegalArgumentException("Unexpected type in quantity column: " + existingValue.getClass().getName());
                     }
                     int newQuantity = existingQuantity + quantity;
-                    model.setValueAt(newQuantity, i, 2);
-                    model.setValueAt(price * newQuantity, i, 3);
+                    model.setValueAt(newQuantity, i, 3);
+                    model.setValueAt(price * newQuantity, i, 4);
                     exists = true;
                     break;
                 }
