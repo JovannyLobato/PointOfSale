@@ -319,13 +319,28 @@ public class jfrmSales extends javax.swing.JFrame {
                     JOptionPane.QUESTION_MESSAGE);
 
                 if (confirmation == JOptionPane.YES_OPTION) {
-                    String result = productsDAO.decreaseProductQuantityWithTransaction(productCode, SOMEBITS)
+                    String result;
+                    for(int i=0; i<productsList.size(); i++){
+                        modProduct p=productsList.get(i);
+                        modProduct pO = productsDAO.read(p.getProductCode());
+                        if(p.getQuantityAvailable()!= pO.getQuantityAvailable()){
+                            result = productsDAO.decreaseProductQuantityWithTransaction(
+                                    p.getProductCode(), 
+                                    pO.getQuantityAvailable()-p.getQuantityAvailable()
+                            );
+                            if(!result.equals("Quantity successfully updated.")){
+                                JOptionPane.showMessageDialog(this, result, "Transaction Failed", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                        }
+                    }
                     double change = paymentAmount - total;
                     JOptionPane.showMessageDialog(this, 
-                        "Payment successful!\nChange: $" + String.format("%.2f", change), 
-                        "Payment Confirmed", JOptionPane.INFORMATION_MESSAGE);
+                    "Payment successful!\nChange: $" + String.format("%.2f", change), 
+                    "Payment Confirmed", JOptionPane.INFORMATION_MESSAGE);
                     tfPaymentAmount.setText("");
                     lblTotal.setText("Total: 0.00");
+                    
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, 
@@ -386,14 +401,14 @@ public class jfrmSales extends javax.swing.JFrame {
     class NumericDocumentFilter extends DocumentFilter {
     @Override
     public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-        if (string != null && string.matches("\\d*")) { // Solo números
+        if (string != null && string.matches("\\d*")) {
             super.insertString(fb, offset, string, attr);
         }
     }
 
     @Override
     public void replace(FilterBypass fb, int offset, int length, String string, AttributeSet attr) throws BadLocationException {
-        if (string != null && string.matches("\\d*")) { // Solo números
+        if (string != null && string.matches("\\d*")) { 
             super.replace(fb, offset, length, string, attr);
         }
     }

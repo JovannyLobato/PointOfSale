@@ -162,6 +162,7 @@ public class ProductDAO {
         Connection connection = null;
 
         try {
+            // Establecer la conexión
             connection = cx.conectar();
             connection.setAutoCommit(false);
 
@@ -174,11 +175,8 @@ public class ProductDAO {
                 int currentQuantity = rs.getInt("QuantityAvailable");
 
                 if (currentQuantity < quantitySold) {
-                    psSelect.close();
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    cx.desconectar();
-                    return "Insufficient stock for the product.";
+                    connection.rollback();  // Revierte la transacción si no hay suficiente stock
+                    return "Insufficient stock for the product; product: " + rs.getString("nam" + ", Stock: "+ rs.getInt("quantityAvailable"));
                 }
 
                 String update = "UPDATE products SET QuantityAvailable = QuantityAvailable - ? WHERE ProductCode = ?;";
@@ -186,26 +184,18 @@ public class ProductDAO {
                 psUpdate.setInt(1, quantitySold);
                 psUpdate.setString(2, productCode);
                 psUpdate.executeUpdate();
-                
-                connection.commit();
-                
-                psSelect.close();
-                psUpdate.close();
-                connection.setAutoCommit(true);
-                cx.desconectar();
+
+                connection.commit();  // Si todo fue exitoso, hace commit a la transacción
 
                 return "Quantity successfully updated.";
             } else {
-                psSelect.close();
-                connection.rollback();
-                connection.setAutoCommit(true);
-                cx.desconectar();
+                connection.rollback();  // Revierte la transacción si no se encuentra el producto
                 return "Product not found.";
             }
         } catch (SQLException ex) {
             if (connection != null) {
                 try {
-                    connection.rollback(); 
+                    connection.rollback();  // Revierte cualquier cambio en caso de error
                 } catch (SQLException rollbackEx) {
                     Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, rollbackEx);
                 }
@@ -213,10 +203,12 @@ public class ProductDAO {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             return "An error occurred while updating the product quantity.";
         } finally {
+            // Asegúrate de cerrar los recursos en el bloque finally
             if (connection != null) {
                 try {
+                    // Asegúrate de que la conexión se cierra adecuadamente después de todo
                     connection.setAutoCommit(true);
-                    cx.desconectar();
+                    cx.desconectar();  // Solo una vez al final, asegurando que no se cierre prematuramente
                 } catch (SQLException ex) {
                     Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
