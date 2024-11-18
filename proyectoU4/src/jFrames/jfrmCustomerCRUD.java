@@ -89,6 +89,7 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnExit.setBackground(new java.awt.Color(153, 0, 0));
@@ -98,28 +99,30 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 40, 30));
+        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, 40, 30));
 
-        btnBackToMenu.setText("Back to menu");
+        btnBackToMenu.setBackground(new java.awt.Color(153, 102, 0));
+        btnBackToMenu.setText("Menu");
         btnBackToMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackToMenuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 500, -1, -1));
+        jPanel1.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, 100, 30));
 
-        jLabel1.setText("Customer CRUD");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setText("Clientes");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, -1, -1));
 
         tblCustomers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código", "Nombre", "Apellido", "Direccion", "cod.Postal", "Ciudad", "Telefono", "Email"
             }
         ));
         tblCustomers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,124 +132,136 @@ public class jfrmCustomerCRUD extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblCustomers);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, 240));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 650, 240));
 
         tfCustomerID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCustomerIDActionPerformed(evt);
             }
         });
-        jPanel1.add(tfCustomerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 60, 30));
+        jPanel1.add(tfCustomerID, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 60, 30));
 
-        jLabel2.setText("*Customer ID");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 70, -1));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        jLabel2.setText("Código");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 70, -1));
 
-        jLabel3.setText("*Name");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        jLabel3.setText("Nombre");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
 
         tfNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfNamActionPerformed(evt);
             }
         });
-        jPanel1.add(tfNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 60, 30));
+        jPanel1.add(tfNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 150, 30));
 
-        jLabel4.setText("*Last Name");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        jLabel4.setText("Apellidos");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
         tfSurname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSurnameActionPerformed(evt);
             }
         });
-        jPanel1.add(tfSurname, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 60, 30));
+        jPanel1.add(tfSurname, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 360, 130, 30));
 
-        jLabel5.setText("Address");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        jLabel5.setText("Dirección");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, -1, -1));
 
         tfAddress.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfAddressActionPerformed(evt);
             }
         });
-        jPanel1.add(tfAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 350, 60, 30));
+        jPanel1.add(tfAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 360, 140, 30));
 
-        jLabel6.setText("Postal Code");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
+        jLabel6.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        jLabel6.setText("Cod.Postal");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, -1, -1));
 
         tfPostalCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPostalCodeActionPerformed(evt);
             }
         });
-        jPanel1.add(tfPostalCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, 60, 30));
+        jPanel1.add(tfPostalCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 360, 90, 30));
 
-        City.setText("city");
-        jPanel1.add(City, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, -1, -1));
+        City.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        City.setText("Ciudad");
+        jPanel1.add(City, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, -1, -1));
 
         tfCity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCityActionPerformed(evt);
             }
         });
-        jPanel1.add(tfCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 60, 30));
+        jPanel1.add(tfCity, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 150, 30));
 
-        jLabel7.setText("*Phone");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
+        jLabel7.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        jLabel7.setText("Telefono");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, -1, -1));
 
         tfPhone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPhoneActionPerformed(evt);
             }
         });
-        jPanel1.add(tfPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 350, 60, 30));
+        jPanel1.add(tfPhone, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 150, 30));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel8.setText("Email");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 400, -1, -1));
 
         tfEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfEmailActionPerformed(evt);
             }
         });
-        jPanel1.add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 410, 60, 30));
+        jPanel1.add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 190, 30));
 
-        btnAddCustomer.setText("Add Customer");
+        btnAddCustomer.setBackground(new java.awt.Color(153, 102, 0));
+        btnAddCustomer.setText("Agregar");
         btnAddCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddCustomerActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
+        jPanel1.add(btnAddCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 90, 30));
 
-        btnModifyCustomer.setText("Modify Customer");
+        btnModifyCustomer.setBackground(new java.awt.Color(153, 102, 0));
+        btnModifyCustomer.setText("Modificar");
         btnModifyCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyCustomerActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModifyCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
+        jPanel1.add(btnModifyCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 110, 30));
 
-        btnCancel.setText("Cancel");
+        btnCancel.setBackground(new java.awt.Color(153, 102, 0));
+        btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, -1, -1));
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 480, 120, 30));
 
-        btnDeleteCustomer.setText("Delete Customer");
+        btnDeleteCustomer.setBackground(new java.awt.Color(153, 102, 0));
+        btnDeleteCustomer.setText("Eliminar");
         btnDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteCustomerActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDeleteCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
+        jPanel1.add(btnDeleteCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 110, 30));
 
-        jLabel9.setText("Fields marked with * are required.");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
+        jLabel9.setText("No dejes espacios en blanco");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 540));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 550));
 
         pack();
         setLocationRelativeTo(null);

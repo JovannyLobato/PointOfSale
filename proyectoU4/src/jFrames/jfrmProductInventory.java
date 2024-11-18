@@ -72,6 +72,7 @@ public class jfrmProductInventory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 153));
         jPanel2.setPreferredSize(new java.awt.Dimension(660, 540));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -84,6 +85,8 @@ public class jfrmProductInventory extends javax.swing.JFrame {
         });
         jPanel2.add(btnExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 40, 30));
 
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+
         tblProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -92,9 +95,10 @@ public class jfrmProductInventory extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Nombre", "Precio", "Cantidad"
             }
         ));
+        tblProducts.setSelectionBackground(new java.awt.Color(102, 51, 0));
         tblProducts.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblProductsMouseClicked(evt);
@@ -102,81 +106,92 @@ public class jfrmProductInventory extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblProducts);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 210));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 600, 210));
 
         tfProductCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfProductCodeActionPerformed(evt);
             }
         });
-        jPanel2.add(tfProductCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 90, 30));
+        jPanel2.add(tfProductCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 90, 30));
 
-        jLabel3.setText("*Product Code");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Palatino Linotype", 0, 14)); // NOI18N
+        jLabel3.setText("Código");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 90, -1));
 
-        jLabel4.setText("*Product Name");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
-        jPanel2.add(tfNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 90, 30));
-        jPanel2.add(tfPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 90, 30));
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel4.setText("Nombre del producto");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, -1, -1));
+        jPanel2.add(tfNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 160, 30));
+        jPanel2.add(tfPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 90, 30));
 
-        jLabel9.setText("*Price");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 270, -1, -1));
+        jLabel9.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel9.setText("Precio");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, -1, -1));
 
-        jLabel11.setText("*Quantity Available");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, -1, -1));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("Cantidad");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, -1, -1));
 
         tfQuantityAvailable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfQuantityAvailableActionPerformed(evt);
             }
         });
-        jPanel2.add(tfQuantityAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 90, 30));
+        jPanel2.add(tfQuantityAvailable, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 90, 30));
 
-        jLabel13.setText("Product Inventory");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        jLabel13.setFont(new java.awt.Font("Palatino Linotype", 0, 24)); // NOI18N
+        jLabel13.setText("Inventario de Productos");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 270, -1));
 
-        btnAddProduct.setText("Add Product");
+        btnAddProduct.setBackground(new java.awt.Color(102, 51, 0));
+        btnAddProduct.setText("Agregar");
         btnAddProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddProductActionPerformed(evt);
             }
         });
-        jPanel2.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, -1, -1));
+        jPanel2.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 110, 30));
 
-        btnModifyProduct.setText("Modify Product");
+        btnModifyProduct.setBackground(new java.awt.Color(102, 51, 0));
+        btnModifyProduct.setText("Modificar");
         btnModifyProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyProductActionPerformed(evt);
             }
         });
-        jPanel2.add(btnModifyProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
+        jPanel2.add(btnModifyProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 410, 120, 30));
 
-        btnCancel.setText("Cancel");
+        btnCancel.setBackground(new java.awt.Color(102, 51, 0));
+        btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, -1, -1));
+        jPanel2.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 460, 100, 30));
 
-        btnDeleteProduct.setText("Delete Product");
+        btnDeleteProduct.setBackground(new java.awt.Color(102, 51, 0));
+        btnDeleteProduct.setText("Eliminar");
         btnDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteProductActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDeleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, -1, -1));
+        jPanel2.add(btnDeleteProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, 130, 30));
 
-        btnBackToMenu.setText("Back to menu");
+        btnBackToMenu.setBackground(new java.awt.Color(102, 51, 0));
+        btnBackToMenu.setText("Menu");
         btnBackToMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackToMenuActionPerformed(evt);
             }
         });
-        jPanel2.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 440, -1, -1));
+        jPanel2.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 460, 120, 30));
 
-        jLabel14.setText("Fields marked with * are required.");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, -1, -1));
+        jLabel14.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel14.setText("No dejes espacios en blanco");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 200, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -118,6 +118,7 @@ public class jfrmSales extends javax.swing.JFrame {
         tfQuantity = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(660, 540));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -131,18 +132,20 @@ public class jfrmSales extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 40, 30));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 10, 40, 30));
 
-        btnBackToMenu.setText("Back to menu");
+        btnBackToMenu.setBackground(new java.awt.Color(153, 102, 0));
+        btnBackToMenu.setText("Menu");
         btnBackToMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackToMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 480, -1, -1));
+        getContentPane().add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 120, 30));
 
+        lblUser.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblUser.setText("Vendedor:");
-        getContentPane().add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, 190, -1));
+        getContentPane().add(lblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 190, -1));
 
         tblCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -157,10 +160,11 @@ public class jfrmSales extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblCompras);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 440, 250));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 570, 250));
 
-        lblTime.setText("date and hour");
-        getContentPane().add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, -1));
+        lblTime.setFont(new java.awt.Font("Segoe UI Historic", 0, 14)); // NOI18N
+        lblTime.setText("Fecha y Hora");
+        getContentPane().add(lblTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, -1, -1));
 
         tfProductCode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,20 +176,20 @@ public class jfrmSales extends javax.swing.JFrame {
                 tfProductCodeKeyPressed(evt);
             }
         });
-        getContentPane().add(tfProductCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 440, 70, -1));
+        getContentPane().add(tfProductCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 110, -1));
 
         jLabel1.setText("Product Code");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, -1));
 
         jLabel2.setText("Quantity");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
 
         tfQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfQuantityKeyPressed(evt);
             }
         });
-        getContentPane().add(tfQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 60, 30));
+        getContentPane().add(tfQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 60, 30));
 
         pack();
         setLocationRelativeTo(null);

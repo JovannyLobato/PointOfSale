@@ -108,6 +108,10 @@ public class jfrmLogin extends javax.swing.JFrame {
         pfPassword = new javax.swing.JPasswordField();
         cbRememberMe = new javax.swing.JCheckBox();
         btnExit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 102, 102));
@@ -116,17 +120,20 @@ public class jfrmLogin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(123, 22, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnLogin.setText("Login");
+        btnLogin.setBackground(new java.awt.Color(153, 102, 0));
+        btnLogin.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnLogin.setForeground(new java.awt.Color(153, 102, 0));
+        btnLogin.setText("Entrar");
         btnLogin.setSelected(true);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 73, 30));
+        jPanel2.add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, 110, 30));
 
         tfUser.setToolTipText("user");
         tfUser.addActionListener(new java.awt.event.ActionListener() {
@@ -134,14 +141,14 @@ public class jfrmLogin extends javax.swing.JFrame {
                 tfUserActionPerformed(evt);
             }
         });
-        jPanel2.add(tfUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 90, -1));
+        jPanel2.add(tfUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 270, -1));
 
         pfPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 pfPasswordActionPerformed(evt);
             }
         });
-        jPanel2.add(pfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 90, -1));
+        jPanel2.add(pfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 260, 270, -1));
 
         cbRememberMe.setText("Remember me");
         cbRememberMe.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +156,7 @@ public class jfrmLogin extends javax.swing.JFrame {
                 cbRememberMeActionPerformed(evt);
             }
         });
-        jPanel2.add(cbRememberMe, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, -1, -1));
+        jPanel2.add(cbRememberMe, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
 
         btnExit.setBackground(new java.awt.Color(153, 0, 0));
         btnExit.setText("X");
@@ -160,7 +167,25 @@ public class jfrmLogin extends javax.swing.JFrame {
         });
         jPanel2.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 40, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 540));
+        jLabel1.setFont(new java.awt.Font("Lucida Calligraphy", 3, 48)); // NOI18N
+        jLabel1.setText("Mercado Flash");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 440, -1));
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+        jLabel2.setText("Usuario");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, -1, -1));
+        jLabel2.getAccessibleContext().setAccessibleName("JLUsuariao");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Contraseña");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, -1, -1));
+        jLabel3.getAccessibleContext().setAccessibleName("jLContraseña");
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Imagenes/login-icon.png"))); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 260, 270));
+        jLabel4.getAccessibleContext().setAccessibleName("Imagen");
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 440));
 
         pack();
         setLocationRelativeTo(null);
@@ -262,6 +287,10 @@ public class jfrmLogin extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnLogin;
     private javax.swing.JCheckBox cbRememberMe;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField pfPassword;

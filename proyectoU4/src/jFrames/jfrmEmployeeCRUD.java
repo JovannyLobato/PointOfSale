@@ -97,6 +97,7 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnExit.setBackground(new java.awt.Color(153, 0, 0));
@@ -106,52 +107,57 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 40, 30));
+        jPanel1.add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 40, 30));
 
-        btnBackToMenu.setText("Back to menu");
+        btnBackToMenu.setBackground(new java.awt.Color(153, 102, 0));
+        btnBackToMenu.setText("Menu");
         btnBackToMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackToMenuActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, -1, -1));
+        jPanel1.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 110, 30));
 
-        jLabel1.setText("Employees CRUD");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 0, 36)); // NOI18N
+        jLabel1.setText("Empleados");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        btnAddEmployee.setText("Add Employee");
+        btnAddEmployee.setBackground(new java.awt.Color(153, 102, 0));
+        btnAddEmployee.setText("Agregar");
         btnAddEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddEmployeeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAddEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, -1, -1));
+        jPanel1.add(btnAddEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, 120, 30));
 
-        btnModifyEmployee.setText("Modify Employee");
+        btnModifyEmployee.setBackground(new java.awt.Color(153, 102, 0));
+        btnModifyEmployee.setText("Modifcar");
         btnModifyEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModifyEmployeeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModifyEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 450, -1, -1));
+        jPanel1.add(btnModifyEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 140, 30));
 
-        btnDeleteEmployee.setText("Delete Employee");
+        btnDeleteEmployee.setBackground(new java.awt.Color(153, 102, 0));
+        btnDeleteEmployee.setText("Eliminar");
         btnDeleteEmployee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteEmployeeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnDeleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 460, -1, -1));
+        jPanel1.add(btnDeleteEmployee, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 480, 130, 30));
 
         tblEmployees.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Title 2", "Nombre", "Apellido", "RFC", "Direccion", "Cod. Postal", "Ciudad", "Telefono", "Email"
             }
         ));
         tblEmployees.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +167,7 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblEmployees);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 590, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 720, 180));
 
         tfIdEmpleado.setToolTipText("idEmpleado");
         tfIdEmpleado.addActionListener(new java.awt.event.ActionListener() {
@@ -169,73 +175,82 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
                 tfIdEmpleadoActionPerformed(evt);
             }
         });
-        jPanel1.add(tfIdEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 70, -1));
+        jPanel1.add(tfIdEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 80, -1));
 
         tfNombre.setToolTipText("nombre");
-        jPanel1.add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 300, 70, -1));
+        jPanel1.add(tfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 160, -1));
 
-        jLabel2.setText("*Employee iD");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, 20));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel2.setText("*Codigo");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, 20));
 
-        jLabel3.setText("*Name");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel3.setText("*Nombre");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, -1));
 
         tfApellido.setToolTipText("Last Name");
-        jPanel1.add(tfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 70, -1));
+        jPanel1.add(tfApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 310, 160, -1));
 
-        jLabel4.setText("Last Name");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, -1, -1));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel4.setText("Apellido");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, -1, -1));
 
         pfPass1.setToolTipText("insert Password");
-        jPanel1.add(pfPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 70, -1));
+        jPanel1.add(pfPass1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, 170, -1));
 
-        jLabel5.setText("*Password");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel5.setText("*Contraseña");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, -1, 20));
 
-        jLabel6.setText("*Insert password again");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
+        jLabel6.setText("*Confirma contraseña");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, -1, -1));
 
         pfPass2.setToolTipText("insert Password again");
-        jPanel1.add(pfPass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, 80, -1));
+        jPanel1.add(pfPass2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 150, -1));
 
         jLabel7.setText("RFC");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
-        jPanel1.add(tfRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 70, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, -1, -1));
+        jPanel1.add(tfRFC, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, 110, -1));
 
-        jLabel8.setText("Address");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
-        jPanel1.add(tfDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, 70, -1));
-        jPanel1.add(tfCp, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 300, 70, -1));
+        jLabel8.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel8.setText("Direccion");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
+        jPanel1.add(tfDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 160, -1));
+        jPanel1.add(tfCp, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 310, 70, -1));
 
-        jLabel9.setText("cp");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, -1, -1));
-        jPanel1.add(tfPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 70, -1));
+        jLabel9.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel9.setText("Cod. Postal");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 290, -1, 20));
+        jPanel1.add(tfPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 360, 130, -1));
 
-        jLabel10.setText("*phone number");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 280, -1, -1));
+        jLabel10.setText("*Telefono");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, -1, -1));
 
         tfCiudad.setToolTipText("city");
-        jPanel1.add(tfCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, 70, -1));
+        jPanel1.add(tfCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, 130, -1));
 
-        jLabel11.setText("City");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
-        jPanel1.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 70, -1));
+        jLabel11.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel11.setText("Ciudad");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
+        jPanel1.add(tfCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 200, 20));
 
-        jLabel12.setText("*E mail");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
+        jLabel12.setFont(new java.awt.Font("Segoe UI Historic", 0, 12)); // NOI18N
+        jLabel12.setText("*Email");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
-        btnCancel.setText("Cancel");
+        btnCancel.setBackground(new java.awt.Color(153, 102, 0));
+        btnCancel.setText("Cancelar");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 500, -1, -1));
+        jPanel1.add(btnCancel, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 480, 90, 30));
 
         jLabel13.setText("Fields marked with * are required.");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 410, -1, -1));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 540));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 550));
 
         pack();
         setLocationRelativeTo(null);
