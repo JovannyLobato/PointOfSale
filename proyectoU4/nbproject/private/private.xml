@@ -12,29 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/Conexion.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/jfrmCustomerCRUD.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/modelos/modSales.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/proyectou4/ProyectoU4.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/modelos/modEmployee.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/jfrmProductInventory.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/jfrmSales.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/jfrmLogin.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/jfrmEmployeeCRUD.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/modelos/modProduct.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/modelos/modUser.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/modelos/modProductDetails.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/modelos/modCustomer.java</file>
-            <file>file:/C:/Users/yarig/Documents/carpetavacia/PointOfSale/proyectoU4/src/jFrames/jfrmMenu.java</file>
-=======
-            <file>file:/E:/elproyectodebd/proyectoU4/src/daos/ProductDAO.java</file>
-            <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/jfrmProductInventory.java</file>
             <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/jfrmSales.java</file>
-            <file>file:/E:/elproyectodebd/proyectoU4/src/modelos/modProductDetails.java</file>
-            <file>file:/E:/elproyectodebd/proyectoU4/src/modelos/modProduct.java</file>
-            <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/Conexion.java</file>
->>>>>>> feature-branch
         </group>
     </open-files>
 </project-private>

@@ -36,6 +36,7 @@ public class jfrmSales extends javax.swing.JFrame {
     Conexion cx;
     int j =2;
     double totalFinal=0;
+    
     // Este metodo no sirve de nada, lo puso mane
     /*
     public jfrmSales(){
@@ -238,6 +239,9 @@ public class jfrmSales extends javax.swing.JFrame {
         if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             tfQuantity.requestFocusInWindow();
         }
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) {
+            tfPaymentAmount.requestFocus();
+        }
     }//GEN-LAST:event_tfProductCodeKeyPressed
 
     private void tfQuantityKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantityKeyPressed
@@ -302,6 +306,8 @@ public class jfrmSales extends javax.swing.JFrame {
             totalFinal+=quantity*productDetails.getPrice();
             lblTotal.setText(String.format("%.2f",totalFinal));
         }
+        
+        
     }//GEN-LAST:event_tfQuantityKeyPressed
 
     private void tfPaymentAmountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPaymentAmountKeyPressed
@@ -344,7 +350,7 @@ public class jfrmSales extends javax.swing.JFrame {
                     "Payment Confirmed", JOptionPane.INFORMATION_MESSAGE);
                     tfPaymentAmount.setText("");
                     lblTotal.setText("Total: 0.00");
-                    
+                    resetSale();
                 }
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, 
@@ -398,7 +404,17 @@ public class jfrmSales extends javax.swing.JFrame {
         }
     }
     
-    
+    private void resetSale() {
+        totalFinal = 0;
+        j = 2;
+        model.setRowCount(0);
+        lblTotal.setText("00.00");
+        tfProductCode.setText("");
+        tfQuantity.setText("");
+        tfPaymentAmount.setText("");
+        productsList = productsDAO.read();
+        tfProductCode.requestFocusInWindow();
+    }
     
     
     
