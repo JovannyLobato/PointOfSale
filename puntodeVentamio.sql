@@ -100,6 +100,8 @@ insert into products values("779284102947","Sabritas",13.00,400);
 
 
 
+-- De aqui para atras
+
 Alter table products
 change column name nam varchar(40) not null;
 describe products;

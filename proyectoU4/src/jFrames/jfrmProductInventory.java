@@ -205,6 +205,7 @@ public class jfrmProductInventory extends javax.swing.JFrame {
     private void btnExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit1ActionPerformed
 
         this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnExit1ActionPerformed
 
     private void tfProductCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfProductCodeActionPerformed

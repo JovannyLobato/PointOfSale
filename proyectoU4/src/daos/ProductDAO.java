@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelos.modProduct;
 
+import java.sql.Connection;
 /**
  *
  * @author jovan
@@ -152,4 +153,75 @@ public class ProductDAO {
             return errors;
         }
     }
+    
+    public String decreaseProductQuantityWithTransaction(String productCode, int quantitySold) {
+        if (quantitySold <= 0) {
+            return "Quantity sold must be greater than zero.";
+        }
+
+        Connection connection = null;
+
+        try {
+            connection = cx.conectar();
+            connection.setAutoCommit(false);
+
+            String select = "SELECT QuantityAvailable FROM products WHERE ProductCode = ?;";
+            PreparedStatement psSelect = connection.prepareStatement(select);
+            psSelect.setString(1, productCode);
+            ResultSet rs = psSelect.executeQuery();
+
+            if (rs.next()) {
+                int currentQuantity = rs.getInt("QuantityAvailable");
+
+                if (currentQuantity < quantitySold) {
+                    psSelect.close();
+                    connection.rollback();
+                    connection.setAutoCommit(true);
+                    cx.desconectar();
+                    return "Insufficient stock for the product.";
+                }
+
+                String update = "UPDATE products SET QuantityAvailable = QuantityAvailable - ? WHERE ProductCode = ?;";
+                PreparedStatement psUpdate = connection.prepareStatement(update);
+                psUpdate.setInt(1, quantitySold);
+                psUpdate.setString(2, productCode);
+                psUpdate.executeUpdate();
+                
+                connection.commit();
+                
+                psSelect.close();
+                psUpdate.close();
+                connection.setAutoCommit(true);
+                cx.desconectar();
+
+                return "Quantity successfully updated.";
+            } else {
+                psSelect.close();
+                connection.rollback();
+                connection.setAutoCommit(true);
+                cx.desconectar();
+                return "Product not found.";
+            }
+        } catch (SQLException ex) {
+            if (connection != null) {
+                try {
+                    connection.rollback(); 
+                } catch (SQLException rollbackEx) {
+                    Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, rollbackEx);
+                }
+            }
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return "An error occurred while updating the product quantity.";
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.setAutoCommit(true);
+                    cx.desconectar();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
 }

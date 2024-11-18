@@ -12,10 +12,12 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/jfrmCustomerCRUD.java</file>
-            <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/jfrmMenu.java</file>
+            <file>file:/E:/elproyectodebd/proyectoU4/src/daos/ProductDAO.java</file>
             <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/jfrmProductInventory.java</file>
             <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/jfrmSales.java</file>
+            <file>file:/E:/elproyectodebd/proyectoU4/src/modelos/modProductDetails.java</file>
+            <file>file:/E:/elproyectodebd/proyectoU4/src/modelos/modProduct.java</file>
+            <file>file:/E:/elproyectodebd/proyectoU4/src/jFrames/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

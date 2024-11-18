@@ -31,9 +31,11 @@ public class jfrmSales extends javax.swing.JFrame {
     DefaultTableModel model = new DefaultTableModel();
     ProductDAO productdao = new ProductDAO();
     ArrayList<modProductDetails> list;
+    ArrayList<modProduct> productsList;
     modProduct product = new modProduct();
     Conexion cx;
     int j =2;
+    double totalFinal=0;
     // Este metodo no sirve de nada, lo puso mane
     /*
     public jfrmSales(){
@@ -75,9 +77,10 @@ public class jfrmSales extends javax.swing.JFrame {
         setTitle("Ventas");
         setUndecorated(true);
         initComponents();
-        
+        tfProductCode.requestFocusInWindow();
         ((AbstractDocument) tfProductCode.getDocument()).setDocumentFilter(new NumericDocumentFilter());
         ((AbstractDocument) tfQuantity.getDocument()).setDocumentFilter(new NumericDocumentFilter());
+        ((AbstractDocument) tfPaymentAmount.getDocument()).setDocumentFilter(new NumericDocumentFilter());
         lblUser.setText(modUser.getInstance().getUsername() + " " + modUser.getInstance().getLastName());
         
         Timer timer = new Timer(1000, new ActionListener() {
@@ -92,12 +95,13 @@ public class jfrmSales extends javax.swing.JFrame {
         jfrmLogin empleado = new jfrmLogin();
         //txtCliente.setEnabled(false);
         this.setLocationRelativeTo(null);
-        model.addColumn("COde");
+        model.addColumn("Code");
         model.addColumn("Product");
         model.addColumn("Price");
         model.addColumn("Quantity");
         model.addColumn("Total");
         tblCompras.setModel(model);
+        productsList = productsDAO.read();
         cx = new Conexion();
     }
     public jfrmSales() {}
@@ -116,6 +120,10 @@ public class jfrmSales extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfQuantity = new javax.swing.JTextField();
+        lblTotal = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfPaymentAmount = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(660, 540));
@@ -187,6 +195,22 @@ public class jfrmSales extends javax.swing.JFrame {
         });
         getContentPane().add(tfQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 60, 30));
 
+        lblTotal.setText(" 00.00");
+        getContentPane().add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, -1));
+
+        jLabel3.setText("Payment Amount");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, -1, -1));
+
+        tfPaymentAmount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfPaymentAmountKeyPressed(evt);
+            }
+        });
+        getContentPane().add(tfPaymentAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 450, 90, 20));
+
+        jLabel4.setText("Total:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -233,34 +257,84 @@ public class jfrmSales extends javax.swing.JFrame {
                 }
             }
             
-            
             product = productsDAO.read(tfProductCode.getText());
             
             if (product.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Product not found or invalid data.", "Error", JOptionPane.ERROR_MESSAGE);
-                return; 
+                return;
             }
             
-            modProductDetails productDetails = new modProductDetails(); 
+            modProductDetails productDetails = new modProductDetails();
             productDetails.setProductCode(product.getProductCode());
             productDetails.setNam(product.getNam());
             productDetails.setPrice(product.getPrice());
             productDetails.setQuantity(quantity);
-            if( product.getQuantityAvailable()<productDetails.getQuantity() ){
+            for(int i=0; i<productsList.size(); i++){
+                if(productDetails.getProductCode().equals(productsList.get(i).getProductCode())){
+                    modProduct p= productsList.get(i);
+                    if(productDetails.getQuantity()>p.getQuantityAvailable()){
+                        JOptionPane.showMessageDialog(this, 
+                        "Insufficient stock. The quantity exceeds the available stock. Available stock: "
+                        + p.getQuantityAvailable(), 
+                        "Error", JOptionPane.ERROR_MESSAGE);
+                        tfQuantity.requestFocusInWindow();
+                        return; 
+                    }else{
+                        p.setQuantityAvailable(p.getQuantityAvailable()-productDetails.getQuantity());
+                        productsList.set(i, p);
+                        break;
+                    }
+                }
+            }
+            /*
+            if( product.getQuantityAvailable() < productDetails.getQuantity() ){
                     //System.out.println(product.getQuantityAvailable());
-                    JOptionPane.showMessageDialog(this, 
-                    "Insufficient stock. The quantity exceeds the available stock. Available stock: " 
-                    + product.getQuantityAvailable(), 
-                    "Error", JOptionPane.ERROR_MESSAGE);
-                    tfQuantity.requestFocusInWindow();
-                    return;                
+                                   
             } 
+            */
             
             tfProductCode.requestFocusInWindow();
             addProductToTable(productDetails);
-
+            totalFinal+=quantity*productDetails.getPrice();
+            lblTotal.setText(String.format("%.2f",totalFinal));
         }
     }//GEN-LAST:event_tfQuantityKeyPressed
+
+    private void tfPaymentAmountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPaymentAmountKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            try {
+                double total = Double.parseDouble(lblTotal.getText().replace("Total: ", "").trim());
+                double paymentAmount = Double.parseDouble(tfPaymentAmount.getText().trim());
+
+                if (paymentAmount < total) {
+                    JOptionPane.showMessageDialog(this, "The payment amount is insufficient. Please enter a valid amount.", 
+                                                  "Insufficient Payment", JOptionPane.ERROR_MESSAGE);
+                    tfPaymentAmount.requestFocusInWindow();
+                    return;
+                }
+                int confirmation = JOptionPane.showConfirmDialog(this, 
+                    "Do you want to proceed with the payment?", 
+                    "Confirm Payment", 
+                    JOptionPane.YES_NO_OPTION, 
+                    JOptionPane.QUESTION_MESSAGE);
+
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    String result = productsDAO.decreaseProductQuantityWithTransaction(productCode, SOMEBITS)
+                    double change = paymentAmount - total;
+                    JOptionPane.showMessageDialog(this, 
+                        "Payment successful!\nChange: $" + String.format("%.2f", change), 
+                        "Payment Confirmed", JOptionPane.INFORMATION_MESSAGE);
+                    tfPaymentAmount.setText("");
+                    lblTotal.setText("Total: 0.00");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, 
+                    "Please enter a valid payment amount.", 
+                    "Invalid Input", JOptionPane.ERROR_MESSAGE);
+                tfPaymentAmount.requestFocusInWindow();
+            }
+        }
+    }//GEN-LAST:event_tfPaymentAmountKeyPressed
     
     private void addProductToTable(modProductDetails pd) {
         try {
@@ -274,7 +348,7 @@ public class jfrmSales extends javax.swing.JFrame {
             for (int i = 0; i < model.getRowCount(); i++) {
                 String existingCode = (String) model.getValueAt(i, 0);
                 if (existingCode.equals(productCode)) {
-                    Object existingValue = model.getValueAt(i, 2);
+                    Object existingValue = model.getValueAt(i, 3);
                     int existingQuantity;
                     if (existingValue instanceof Integer) {
                         existingQuantity = (Integer) existingValue;
@@ -287,14 +361,15 @@ public class jfrmSales extends javax.swing.JFrame {
                     }
                     int newQuantity = existingQuantity + quantity;
                     model.setValueAt(newQuantity, i, 3);
-                    model.setValueAt(price * newQuantity, i, 4);
+                    model.setValueAt(price * newQuantity, i, 4); 
                     exists = true;
                     break;
                 }
             }
             if (!exists) {
-                model.addRow(new Object[]{productCode, productName, price, quantity, total});
+                model.addRow(new Object[]{productCode, productName, String.format("%.2f",price), quantity, String.format("%.2f",total)});
             }
+            
             model.fireTableDataChanged();
             tfProductCode.setText("");
             tfQuantity.setText("");
@@ -373,11 +448,15 @@ public class jfrmSales extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTime;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JLabel lblUser;
     private javax.swing.JTable tblCompras;
+    private javax.swing.JTextField tfPaymentAmount;
     private javax.swing.JTextField tfProductCode;
     private javax.swing.JTextField tfQuantity;
     // End of variables declaration//GEN-END:variables

@@ -287,11 +287,14 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
     */
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         this.dispose();
+        System.exit(0);
+
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnBackToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToMenuActionPerformed
         menuFrame.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnBackToMenuActionPerformed
 
     private void btnModifyEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyEmployeeActionPerformed
