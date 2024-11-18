@@ -22,7 +22,7 @@ public class Conexion {
     String db="pointOfSale";
     String url="jdbc:mysql://localhost:3306/" + db;
     String user="root";
-    String pass="root";
+    String pass="rammus";
     String driver="com.mysql.cj.jdbc.Driver";
     Connection cx;
 

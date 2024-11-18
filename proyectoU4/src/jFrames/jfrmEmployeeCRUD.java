@@ -345,7 +345,7 @@ public class jfrmEmployeeCRUD extends javax.swing.JFrame {
         if(
            String.valueOf(pfPass1.getPassword()).equals(String.valueOf(pfPass2.getPassword()))
            ){
-           //modEmployee employee = new modEmployee();
+           modEmployee employee = new modEmployee();
            employee.setEmployeeID(tfIdEmpleado.getText());
            employee.setPass(String.valueOf(pfPass1.getPassword()));
            employee.setNam(tfNombre.getText());

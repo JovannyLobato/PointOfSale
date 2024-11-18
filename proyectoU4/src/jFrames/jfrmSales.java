@@ -190,30 +190,30 @@ public class jfrmSales extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, -1));
 
         jLabel2.setText("Quantity");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, 10));
 
         tfQuantity.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfQuantityKeyPressed(evt);
             }
         });
-        getContentPane().add(tfQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 60, 30));
+        getContentPane().add(tfQuantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 60, 30));
 
         lblTotal.setText(" 00.00");
-        getContentPane().add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, -1, -1));
+        getContentPane().add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 360, -1, -1));
 
         jLabel3.setText("Payment Amount");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 420, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 380, -1, -1));
 
         tfPaymentAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfPaymentAmountKeyPressed(evt);
             }
         });
-        getContentPane().add(tfPaymentAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 450, 90, 20));
+        getContentPane().add(tfPaymentAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 400, 90, 30));
 
         jLabel4.setText("Total:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 380, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 360, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
