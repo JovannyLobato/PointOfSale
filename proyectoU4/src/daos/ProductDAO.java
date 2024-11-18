@@ -162,7 +162,6 @@ public class ProductDAO {
         Connection connection = null;
 
         try {
-            // Establecer la conexión
             connection = cx.conectar();
             connection.setAutoCommit(false);
 
@@ -175,7 +174,7 @@ public class ProductDAO {
                 int currentQuantity = rs.getInt("QuantityAvailable");
 
                 if (currentQuantity < quantitySold) {
-                    connection.rollback();  // Revierte la transacción si no hay suficiente stock
+                    connection.rollback();  
                     return "Insufficient stock for the product; product: " + rs.getString("nam" + ", Stock: "+ rs.getInt("quantityAvailable"));
                 }
 
@@ -185,17 +184,17 @@ public class ProductDAO {
                 psUpdate.setString(2, productCode);
                 psUpdate.executeUpdate();
 
-                connection.commit();  // Si todo fue exitoso, hace commit a la transacción
+                connection.commit();
 
                 return "Quantity successfully updated.";
             } else {
-                connection.rollback();  // Revierte la transacción si no se encuentra el producto
+                connection.rollback();  
                 return "Product not found.";
             }
         } catch (SQLException ex) {
             if (connection != null) {
                 try {
-                    connection.rollback();  // Revierte cualquier cambio en caso de error
+                    connection.rollback();
                 } catch (SQLException rollbackEx) {
                     Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, rollbackEx);
                 }
@@ -203,12 +202,11 @@ public class ProductDAO {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
             return "An error occurred while updating the product quantity.";
         } finally {
-            // Asegúrate de cerrar los recursos en el bloque finally
+           
             if (connection != null) {
                 try {
-                    // Asegúrate de que la conexión se cierra adecuadamente después de todo
                     connection.setAutoCommit(true);
-                    cx.desconectar();  // Solo una vez al final, asegurando que no se cierre prematuramente
+                    cx.desconectar(); 
                 } catch (SQLException ex) {
                     Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
