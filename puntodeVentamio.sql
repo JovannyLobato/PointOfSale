@@ -97,29 +97,3 @@ INSERT INTO employees VALUES (
 
 insert into products values("768293841094","Coca-Cola3L",47.00,500);
 insert into products values("779284102947","Sabritas",13.00,400);
-
-
-
--- De aqui para atras
-
-Alter table products
-change column name nam varchar(40) not null;
-describe products;
-
-
-
-SET SQL_SAFE_UPDATES = 0;
-DELETE FROM products;
-SET SQL_SAFE_UPDATES = 1;
-
-
-use pointOfSale;
-select * from products;
--- ESTO NO LO EJECUTES
-drop database pointOfSale;
-use pointOfSale;
-select * from employees;
-delete from employees where employeeId='jovanny';
-delete from employees where employeeId = 'lupita';
-describe empleados;
-select * from empleados where idEmpleado = 'lupita' and pass=sha2('4321',256);	
