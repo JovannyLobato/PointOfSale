@@ -1,4 +1,5 @@
-drop database pointofsale;
+-- si ya tienen una base de datos pointodsale, recomiendo usar el drop
+-- drop database pointofsale;
 create database pointOfSale;
 use pointOfSale;
 
@@ -75,6 +76,79 @@ insert into employees values
 ('s22120003',sha2('pass3',256),'Braulio Aaron','Solorio Morales','SOMB020816HPM','Av. Independencia #167','58500','Puruandiro','438 121 5420','s22120003@alumnos.itsur.edu.mx'),
 ('s22120004',sha2('pass4',256),'Yareli Yoselin','Gaona Ceja','GACY041002MUG','Magisterio #19','38983','Uriangato','445 143 3563','s22120004@alumnos.itsur.edu.mx');
 
+-- bebidas, comida, fruta y verduras, cereales, lacteos, limpieza, higiene personal 
+--     categoriname varchar(50) not null,
+ --    descript varchar(100)
+insert into categories (categoriname, descript) values
+('Bebidas','Liquidos refrescantes'),
+('Comida','Alimentos saludables'),
+('Frutas y verduras','Para crecer grandes y fuertes'),
+('Cereales','Granos y legumbres'),
+('Lacteos','Derivados de la leche'),
+('Limpieza','Ideal para la limpieza del hogar'),
+('Higiene personal','Una buena higiene es una buena salud');
+-- ProductCode CHAR(12) PRIMARY KEY unique,
+   --  categoryID int not null,
+   --  nam VARCHAR(40) NOT NULL,
+   --  price DECIMAL(6,2) NOT NULL,
+   --  quantityAvailable INT NOT NULL,
+   
+INSERT INTO products (productcode, categoryID, nam, price, quantityAvailable)
+VALUES
+-- Productos de categoría 1
+('934815812361', 1, 'Jugo de mango BOING 500ml', 10.50, 3100),
+('934815812362', 1, 'Agua de Limon Del Valle 500ml', 15.30, 1800),
+('934815812363', 1, 'Fuze tea 600ml', 20.00, 1500),
+('934815812364', 1, 'Jumex Frutzzo 1L', 25.75, 2500),
+('934815812365', 1, 'Ciel Exprim Limón y Menta 1L', 30.40, 1200),
+('934815812366', 1, 'Frutsu 200ml', 13.00, 2200),
+('934815812367', 1, 'Coca-Cola 355ml', 17.00, 2000),
+-- Productos de categoría 2
+('934815822361', 2, 'Arroz Basmati 1kg', 45.25, 3000),
+('934815822362', 2, 'Pechuga de pollo 650g', 78.60, 2800),
+('934815822363', 2, 'Jamón de pechuga de pavo 275g', 53.45, 3200),
+('934815822374', 2, 'Aceite de oliva 1L', 62.00, 2500),
+('934816822375', 2, 'Costillas de cerdo 500g', 67.50, 1900),
+('934816822376', 2, 'Filetes de pescado 450g', 56.75, 1800),
+('934816822377', 2, 'Avena 1kg', 50.75, 2000),
+-- Productos de categoría 3
+('934816832371', 3, 'Manzana 1k', 50.10, 1999),
+('934816832372', 3, 'Mango 1k', 30.30, 2600),
+('934816832373', 3, 'Pimientos Morrones 1k', 60.00, 2100),
+('934816832374', 3, 'Aguacate 1k', 65.20, 2000),
+('934816832375', 3, 'Cereza 1k', 70.40, 1800),
+('934816832376', 3, 'Lechuga 1k', 45.00, 3200),
+('934816832377', 3, 'Tomate 1k', 52.00, 3000),
+-- Productos de categoría 4
+('934816842371', 4, 'Lentejas 1k', 30.50, 2250),
+('934816842382', 4, 'Frijol 1k', 32.30, 1800),
+('934817842383', 4, 'Garbanzo seco 1k', 26.20, 2300),
+('934817842384', 4, 'Quinoa 750g', 40.00, 2000),
+('934817842385', 4, 'Trigo', 45.30, 1500),
+('934817842386', 4, 'Sorgo 1k', 38.75, 1200),
+-- Productos de categoría 5
+('934817852381', 5, 'Leche 1L', 27.00, 2000),
+('934817852382', 5, 'Queso crema 220g', 38.60, 1400),
+('934817852383', 5, 'Yogur griego natural 400 g', 60.20, 1500),
+('934817852384', 5, 'Queso cotija 250g', 55.50, 1800),
+('934817852385', 5, 'Yogurt Danone 450ml', 33.30, 1000),
+('934817852396', 5, 'Leche evaporada 360ml', 40.00, 2500),
+-- Productos de categoría 6
+('934818862391', 6, 'Detergente en polvo Ariel 500g', 32.75, 3100),
+('934818862392', 6, 'Limpiador multiusos Fabuloso 500ml', 28.20, 2250),
+('934818862393', 6, 'Jabón liquido para trastes Dawn 750ml', 40.10, 1900),
+('934818862394', 6, 'Cloro Clorox 1L', 35.30, 2400),
+('934818862395', 6, 'Desengrasante Mr. Musculo 500g', 43.50, 2900),
+('934818862396', 6, 'Fregona', 37.50, 3200),
+-- Productos de categoría 7
+('934818872391', 7, 'Enjuague bucal Listerine 600ml', 61.00, 5000),
+('934818872392', 7, 'Desodorante en aerosol Nivea 150ml', 45.20, 2600),
+('934818872393', 7, 'Jabon de banio (barra) Dove', 29.30, 3600),
+('934818872394', 7, 'Shampoo Sedal 225ml', 20.50, 2000),
+('934818872405', 7, 'Espuma de afeitar Gillette 250ml', 70.75, 1789),
+('934818872406', 7, 'Pasta de dientes Colgate', 52.75, 1800);
+
+   
 delimiter |
 
 create procedure insert_random_customers(i int)
@@ -180,30 +254,30 @@ begin
     end while;
 end|
 
-create procedure insert_orderDetails(i int)
+create procedure insert_random_orderDetails(i int)
 begin
-	declare j int;
+	declare j int default 0;
 	declare idOrder int;
-	declare codeProducts char(12);
+	declare codeProduct char(12);
     declare precio decimal(6,2);
     
     while j<i do
     select orderid into idOrder from orders
     order by rand() limit 1;
     
-    select productocode into codeProduct from products
+    select productcode into codeProduct from products
     order by rand() limit 1;
     
-    select price into precio from product
-    order by rand() limit 1;
+    select price into precio from products where codeProduct=productCode;
     
-    insert into order_details(idOrder,productCode, quantity, price) values
+    insert into order_details(orderId,productCode, quantity, price) values
 		(idOrder,codeProduct,floor(1 + (rand()*30)),precio);
+	set j=j+1;
     end while;
 end|
 
 delimiter ;
 
-call insert_customers(50);
-call insert_orders(3000);
-select * from orders;
+call insert_random_customers(50);
+call insert_random_orders(300);
+call insert_random_orderDetails(5000);
