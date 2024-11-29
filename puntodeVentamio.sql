@@ -76,9 +76,7 @@ insert into employees values
 ('s22120003',sha2('pass3',256),'Braulio Aaron','Solorio Morales','SOMB020816HPM','Av. Independencia #167','58500','Puruandiro','438 121 5420','s22120003@alumnos.itsur.edu.mx'),
 ('s22120004',sha2('pass4',256),'Yareli Yoselin','Gaona Ceja','GACY041002MUG','Magisterio #19','38983','Uriangato','445 143 3563','s22120004@alumnos.itsur.edu.mx');
 
--- bebidas, comida, fruta y verduras, cereales, lacteos, limpieza, higiene personal 
---     categoriname varchar(50) not null,
- --    descript varchar(100)
+
 insert into categories (categoriname, descript) values
 ('Bebidas','Liquidos refrescantes'),
 ('Comida','Alimentos saludables'),
@@ -87,11 +85,7 @@ insert into categories (categoriname, descript) values
 ('Lacteos','Derivados de la leche'),
 ('Limpieza','Ideal para la limpieza del hogar'),
 ('Higiene personal','Una buena higiene es una buena salud');
--- ProductCode CHAR(12) PRIMARY KEY unique,
-   --  categoryID int not null,
-   --  nam VARCHAR(40) NOT NULL,
-   --  price DECIMAL(6,2) NOT NULL,
-   --  quantityAvailable INT NOT NULL,
+
    
 INSERT INTO products (productcode, categoryID, nam, price, quantityAvailable)
 VALUES
