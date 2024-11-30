@@ -275,3 +275,78 @@ delimiter ;
 call insert_random_customers(50);
 call insert_random_orders(300);
 call insert_random_orderDetails(5000);
+
+create view SalesReport_Junuary as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-01-01' and '2024-01-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_February as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-02-01' and '2024-02-29'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_March as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-03-01' and '2024-03-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_April as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-04-01' and '2024-04-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_May as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-05-01' and '2024-05-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_June as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-06-01' and '2024-06-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_July as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-07-01' and '2024-07-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_August as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-08-01' and '2024-08-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_September as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-09-01' and '2024-09-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_October as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-10-01' and '2024-10-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+
+create view SalesReport_November as 
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-11-01' and '2024-11-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_December as 
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-12-01' and '2024-12-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+select * from SalesReport_December;
