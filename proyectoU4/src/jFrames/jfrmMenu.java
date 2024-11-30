@@ -43,6 +43,7 @@ public class jfrmMenu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        btnSalesReport = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,6 +124,14 @@ public class jfrmMenu extends javax.swing.JFrame {
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Imagenes/regresar.png"))); // NOI18N
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 150, 150));
 
+        btnSalesReport.setText("Sales Report");
+        btnSalesReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalesReportActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSalesReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 540));
 
         pack();
@@ -164,6 +173,12 @@ public class jfrmMenu extends javax.swing.JFrame {
         customerCRUDFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCustomerCRUDActionPerformed
+
+    private void btnSalesReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalesReportActionPerformed
+        jfrmSalesReport salesReport = new jfrmSalesReport();
+        salesReport.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalesReportActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,6 +222,7 @@ public class jfrmMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnProductInventory;
     private javax.swing.JButton btnSales;
+    private javax.swing.JButton btnSalesReport;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
