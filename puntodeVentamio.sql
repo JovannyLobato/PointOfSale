@@ -277,7 +277,7 @@ call insert_random_orders(300);
 call insert_random_orderDetails(5000);
 
 delimiter $$
-
+-- Procedimiento para insertar clientes
 CREATE PROCEDURE InsertCustomer(
     IN p_CustomerID CHAR(10),
     IN p_nam VARCHAR(50),
@@ -293,7 +293,7 @@ BEGIN
     VALUES (p_CustomerID, p_nam, p_surname, p_address, p_postalCode, p_city, p_phone, p_email);
 END$$
 
-
+-- Procedimiento para actualizar clientes
 CREATE PROCEDURE UpdateCustomer(
     IN p_CustomerID CHAR(10),
     IN p_nam VARCHAR(50),
@@ -311,7 +311,7 @@ BEGIN
     WHERE CustomerID = p_CustomerID;
 END$$
 
-
+-- Procedimiento para eliminar clientes
 CREATE PROCEDURE DeleteCustomer(IN p_CustomerID CHAR(10))
 BEGIN
     DELETE FROM customers WHERE CustomerID = p_CustomerID;
