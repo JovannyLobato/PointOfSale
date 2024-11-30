@@ -1,5 +1,5 @@
 -- si ya tienen una base de datos pointodsale, recomiendo usar el drop
--- drop database pointofsale;
+drop database pointofsale;
 create database pointOfSale;
 use pointOfSale;
 
@@ -72,9 +72,10 @@ CREATE TABLE order_details (
 
 insert into employees values
 ('s22120001',sha2('pass1',256),'Luis Manuel','Cardenas Ibarra','CAIL041104HMG','Maria Calderon #52','38880','Moroleon','445 139 6514','s22120001@alumnos.itsur.edu.mx'),
-('s22120002',sha2('pass2',256),'Jovanny','Lobato Garcia','GALJ040404HUG','Delia #3','38980','Uriangato','445 455 5701','s22120002@alumnos.itsur.edu.mx'),
+('s22120002',sha2('pass2',256),'Jovanny','Lobato Garcia','LOGJ0404HMBN5','Dalia #42','38980','Uriangato','445 455 5701','s22120002@alumnos.itsur.edu.mx'),
 ('s22120003',sha2('pass3',256),'Braulio Aaron','Solorio Morales','SOMB020816HPM','Av. Independencia #167','58500','Puruandiro','438 121 5420','s22120003@alumnos.itsur.edu.mx'),
-('s22120004',sha2('pass4',256),'Yareli Yoselin','Gaona Ceja','GACY041002MUG','Magisterio #19','38983','Uriangato','445 143 3563','s22120004@alumnos.itsur.edu.mx');
+('s22120004',sha2('pass4',256),'Yareli Yoselin','Gaona Ceja','GACY041002MUG','Magisterio #19','38983','Uriangato','445 143 3563','s22120004@alumnos.itsur.edu.mx'),
+('lupita',sha2('1234',256),'Guadalupe Elizabeth','Camarena','CAGG060204HMN','Aldama #121','38980','Uriangato','4451591620','m22120024@alumnos.itsur.edu.mx');
 
 -- bebidas, comida, fruta y verduras, cereales, lacteos, limpieza, higiene personal 
 --     categoriname varchar(50) not null,
