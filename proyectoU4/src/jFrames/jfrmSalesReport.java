@@ -15,7 +15,11 @@ public class jfrmSalesReport extends javax.swing.JFrame {
      */
     public jfrmSalesReport() {
         setUndecorated(true);
-        initComponents();
+        initComponents();       
+        
+        // Estos dos metodos oculatan la tabla
+        jScrollPane1.setVisible(false);
+        jtSales.setVisible(false);
     }
 
     /**
@@ -29,6 +33,8 @@ public class jfrmSalesReport extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         btnExit1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtSales = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -45,6 +51,21 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         });
         jPanel2.add(btnExit1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 40, 30));
 
+        jtSales.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jtSales);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
+
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -52,7 +73,6 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit1ActionPerformed
-
         this.dispose();
         System.exit(0);
     }//GEN-LAST:event_btnExit1ActionPerformed
@@ -95,5 +115,7 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtSales;
     // End of variables declaration//GEN-END:variables
 }

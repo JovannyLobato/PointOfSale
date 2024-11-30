@@ -3,6 +3,7 @@ drop database pointofsale;
 create database pointOfSale;
 use pointOfSale;
 
+-- Tabla de empleados
 create table employees (
     EmployeeID varchar(10) primary key,
     pass char(64) not null,
@@ -16,6 +17,7 @@ create table employees (
     email varchar(50) not null
 );
 
+-- Tabla de clientes
 create table customers (
     CustomerID char(10) primary key,
     nam varchar(50) not null,
@@ -27,6 +29,7 @@ create table customers (
     email varchar(50) not null
 );
 
+-- Tabla de ventas
 CREATE TABLE orders (
     OrderID INT PRIMARY KEY AUTO_INCREMENT,
     date DATETIME,
@@ -38,6 +41,7 @@ CREATE TABLE orders (
     REFERENCES customers(CustomerID)
 );
 
+-- tabla de categorias
 -- bebidas, comida, fruta y verduras, cereales, lacteos, limpieza, higiene personal 
 create table categories (
 	categoryID int primary key auto_increment,
@@ -76,7 +80,6 @@ insert into employees values
 ('s22120003',sha2('pass3',256),'Braulio Aaron','Solorio Morales','SOMB020816HPM','Av. Independencia #167','58500','Puruandiro','438 121 5420','s22120003@alumnos.itsur.edu.mx'),
 ('s22120004',sha2('pass4',256),'Yareli Yoselin','Gaona Ceja','GACY041002MUG','Magisterio #19','38983','Uriangato','445 143 3563','s22120004@alumnos.itsur.edu.mx'),
 ('lupita',sha2('1234',256),'Guadalupe Elizabeth','Camarena','CAGG060204HMN','Aldama #121','38980','Uriangato','4451591620','m22120024@alumnos.itsur.edu.mx');
-
 
 insert into categories (categoriname, descript) values
 ('Bebidas','Liquidos refrescantes'),
@@ -143,7 +146,7 @@ VALUES
 ('934818872405', 7, 'Espuma de afeitar Gillette 250ml', 70.75, 1789),
 ('934818872406', 7, 'Pasta de dientes Colgate', 52.75, 1800);
 
-   
+
 delimiter |
 create procedure insert_random_customers(i int)
 begin
@@ -220,7 +223,7 @@ begin
         select citys into randomCity from listCitys
         order by rand() limit 1;
         
-        -- insertar valores random
+        -- insertar valores random 
         INSERT INTO customers (CustomerID, nam, surname, address, postalCode, city, phone, email)VALUES 
 		(concat('CU2473',idcustomer),
         randomName, 
@@ -233,7 +236,7 @@ begin
         set j=j+1;
         set idcustomer=idcustomer+1;
     end while;
-    -- elimitar tablas temporales
+    -- eliminar tablas temporales
     drop temporary table listNames;
     drop temporary table listLastNames;
     drop temporary table listAddress;
@@ -279,7 +282,7 @@ begin
 	set j=j+1;
     end while;
 end|
-	
+
 delimiter $$
 -- Procedimiento para insertar clientes
 CREATE PROCEDURE InsertCustomer(

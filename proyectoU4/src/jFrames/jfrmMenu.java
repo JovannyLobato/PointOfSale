@@ -130,7 +130,7 @@ public class jfrmMenu extends javax.swing.JFrame {
                 btnSalesReportActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalesReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 510, -1, -1));
+        jPanel1.add(btnSalesReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 540));
 
