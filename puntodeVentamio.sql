@@ -410,4 +410,7 @@ JOIN order_details od ON o.orderid = od.orderid JOIN employees e ON e.employeeid
 GROUP BY  o.employeeid, CONCAT(e.nam, ' ', e.surname) ORDER BY  `Total` DESC;
 
 
+
+
+
 select * from SalesReport_December;
