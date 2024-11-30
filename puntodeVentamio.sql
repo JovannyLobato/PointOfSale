@@ -276,6 +276,50 @@ call insert_random_customers(50);
 call insert_random_orders(300);
 call insert_random_orderDetails(5000);
 
+delimiter $$
+
+CREATE PROCEDURE InsertCustomer(
+    IN p_CustomerID CHAR(10),
+    IN p_nam VARCHAR(50),
+    IN p_surname VARCHAR(100),
+    IN p_address VARCHAR(100),
+    IN p_postalCode CHAR(5),
+    IN p_city VARCHAR(50),
+    IN p_phone CHAR(12),
+    IN p_email VARCHAR(50)
+)
+BEGIN
+    INSERT INTO customers (CustomerID, nam, surname, address, postalCode, city, phone, email)
+    VALUES (p_CustomerID, p_nam, p_surname, p_address, p_postalCode, p_city, p_phone, p_email);
+END$$
+
+
+CREATE PROCEDURE UpdateCustomer(
+    IN p_CustomerID CHAR(10),
+    IN p_nam VARCHAR(50),
+    IN p_surname VARCHAR(100),
+    IN p_address VARCHAR(100),
+    IN p_postalCode CHAR(5),
+    IN p_city VARCHAR(50),
+    IN p_phone CHAR(12),
+    IN p_email VARCHAR(50)
+)
+BEGIN
+    UPDATE customers
+    SET nam = p_nam, surname = p_surname, address = p_address, 
+        postalCode = p_postalCode, city = p_city, phone = p_phone, email = p_email
+    WHERE CustomerID = p_CustomerID;
+END$$
+
+
+CREATE PROCEDURE DeleteCustomer(IN p_CustomerID CHAR(10))
+BEGIN
+    DELETE FROM customers WHERE CustomerID = p_CustomerID;
+END$$
+
+DELIMITER ;
+
+
 create view SalesReport_Junuary as
 select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
 order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
