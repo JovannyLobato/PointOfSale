@@ -77,9 +77,7 @@ insert into employees values
 ('s22120004',sha2('pass4',256),'Yareli Yoselin','Gaona Ceja','GACY041002MUG','Magisterio #19','38983','Uriangato','445 143 3563','s22120004@alumnos.itsur.edu.mx'),
 ('lupita',sha2('1234',256),'Guadalupe Elizabeth','Camarena','CAGG060204HMN','Aldama #121','38980','Uriangato','4451591620','m22120024@alumnos.itsur.edu.mx');
 
--- bebidas, comida, fruta y verduras, cereales, lacteos, limpieza, higiene personal 
---     categoriname varchar(50) not null,
- --    descript varchar(100)
+
 insert into categories (categoriname, descript) values
 ('Bebidas','Liquidos refrescantes'),
 ('Comida','Alimentos saludables'),
@@ -88,11 +86,7 @@ insert into categories (categoriname, descript) values
 ('Lacteos','Derivados de la leche'),
 ('Limpieza','Ideal para la limpieza del hogar'),
 ('Higiene personal','Una buena higiene es una buena salud');
--- ProductCode CHAR(12) PRIMARY KEY unique,
-   --  categoryID int not null,
-   --  nam VARCHAR(40) NOT NULL,
-   --  price DECIMAL(6,2) NOT NULL,
-   --  quantityAvailable INT NOT NULL,
+
    
 INSERT INTO products (productcode, categoryID, nam, price, quantityAvailable)
 VALUES
@@ -282,3 +276,122 @@ delimiter ;
 call insert_random_customers(50);
 call insert_random_orders(300);
 call insert_random_orderDetails(5000);
+
+delimiter $$
+-- Procedimiento para insertar clientes
+CREATE PROCEDURE InsertCustomer(
+    IN p_CustomerID CHAR(10),
+    IN p_nam VARCHAR(50),
+    IN p_surname VARCHAR(100),
+    IN p_address VARCHAR(100),
+    IN p_postalCode CHAR(5),
+    IN p_city VARCHAR(50),
+    IN p_phone CHAR(12),
+    IN p_email VARCHAR(50)
+)
+BEGIN
+    INSERT INTO customers (CustomerID, nam, surname, address, postalCode, city, phone, email)
+    VALUES (p_CustomerID, p_nam, p_surname, p_address, p_postalCode, p_city, p_phone, p_email);
+END$$
+
+-- Procedimiento para actualizar clientes
+CREATE PROCEDURE UpdateCustomer(
+    IN p_CustomerID CHAR(10),
+    IN p_nam VARCHAR(50),
+    IN p_surname VARCHAR(100),
+    IN p_address VARCHAR(100),
+    IN p_postalCode CHAR(5),
+    IN p_city VARCHAR(50),
+    IN p_phone CHAR(12),
+    IN p_email VARCHAR(50)
+)
+BEGIN
+    UPDATE customers
+    SET nam = p_nam, surname = p_surname, address = p_address, 
+        postalCode = p_postalCode, city = p_city, phone = p_phone, email = p_email
+    WHERE CustomerID = p_CustomerID;
+END$$
+
+-- Procedimiento para eliminar clientes
+CREATE PROCEDURE DeleteCustomer(IN p_CustomerID CHAR(10))
+BEGIN
+    DELETE FROM customers WHERE CustomerID = p_CustomerID;
+END$$
+
+DELIMITER ;
+
+
+create view SalesReport_Junuary as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-01-01' and '2024-01-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_February as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-02-01' and '2024-02-29'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_March as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-03-01' and '2024-03-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_April as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-04-01' and '2024-04-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_May as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-05-01' and '2024-05-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_June as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-06-01' and '2024-06-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_July as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-07-01' and '2024-07-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_August as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-08-01' and '2024-08-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_September as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-09-01' and '2024-09-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_October as
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-10-01' and '2024-10-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+
+create view SalesReport_November as 
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-11-01' and '2024-11-30'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+create view SalesReport_December as 
+select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
+order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
+join employees e on e.employeeid = o.employeeid where o.date between '2024-12-01' and '2024-12-31'
+group by od.orderid order by od.orderid asc, o.date asc; 
+
+select * from SalesReport_December;
