@@ -401,4 +401,10 @@ order_details od join orders o on o.orderid=od.orderid join customers c on c.cus
 join employees e on e.employeeid = o.employeeid where o.date between '2024-12-01' and '2024-12-31'
 group by od.orderid order by od.orderid asc, o.date asc; 
 
+CREATE VIEW SalesReport_ByEmployee AS
+SELECT CONCAT(e.nam, ' ', e.surname) AS `Empleado`, SUM(od.total) AS `Total`, COUNT(DISTINCT o.orderid) AS `Cant. Ventas` FROM orders o
+JOIN order_details od ON o.orderid = od.orderid JOIN employees e ON e.employeeid = o.employeeid
+GROUP BY  o.employeeid, CONCAT(e.nam, ' ', e.surname) ORDER BY  `Total` DESC;
+
+
 select * from SalesReport_December;
