@@ -145,10 +145,11 @@ VALUES
 
    
 delimiter |
-
 create procedure insert_random_customers(i int)
 begin
+	-- contador para la cantidad de operaciones que se van a realizar
 	declare j int default 0;
+    -- variables para los valores aleatorios que se insertarán
     declare randomName varchar(50);
     declare randomLastName1 varchar(50);
     declare randomLastName2 varchar(50);
@@ -156,7 +157,7 @@ begin
     declare randomAddress varchar(100);
     declare randomCity varchar(50);
     declare idcustomer int default 10;
-    
+    -- tablas temporales para guardar valores random
     create temporary table listNames(
     `names` varchar (50)
     );
@@ -172,7 +173,7 @@ begin
     create temporary table listCitys(
     citys varchar(50)
     );
-    
+    -- insertar muchos datos en la tablas temporales
     insert into listNames values
     ('Juan'), ('Andres'), ('Maria'), ('Carla'),('José'), ('Alfredo'),('Milagros'),('Lupita'),
     ('Manuel Sebastian'),('Luis Martin'),('Maria Guadalupe'),('Leah Fernanda'),('Elliot Samuel'),('Clinton Alejandro'),('Valeria Sofia'),('Ana Isabella'),
@@ -201,7 +202,9 @@ begin
     ('Tuxtla Gutierrez'),('San Cristobal Colon'),('Veracruz'),('Xalapa'),('Coatzacoalcos'),('Nuevo Laredo'),('Reynosa'),('Matamoros'),('Tequila'),('Guadalajara'),('Patzcuaro'),
     ('Valle de Bravo'),('San Miguel de Allende'),('Taxco');
     
+    -- ciclo que hará los insert
     while j<i do
+		-- asignar 1 valor random de las tamblas temporales a cada varable
 		select `names` into randomName from listNames
         order by rand() limit 1;
         
@@ -217,6 +220,7 @@ begin
         select citys into randomCity from listCitys
         order by rand() limit 1;
         
+        -- insertar valores random
         INSERT INTO customers (CustomerID, nam, surname, address, postalCode, city, phone, email)VALUES 
 		(concat('CU2473',idcustomer),
         randomName, 
@@ -229,7 +233,7 @@ begin
         set j=j+1;
         set idcustomer=idcustomer+1;
     end while;
-    
+    -- elimitar tablas temporales
     drop temporary table listNames;
     drop temporary table listLastNames;
     drop temporary table listAddress;
@@ -238,9 +242,11 @@ end|
 
 create procedure insert_random_orders(num int)
 begin
+	-- contador de la cantidad de operaciones que se van a realizar
 	declare i int default 0;
     
     while i<num DO
+		-- insertar ordenes con datos aleatorios
 		insert into orders (date,employeeid,customerid)values(
 		concat('2024-',floor(1 + (rand()*12)),'-',floor(1 + (rand()*28))),
 		concat('s2212000',floor(1 + (rand()*4))),
@@ -251,12 +257,15 @@ end|
 
 create procedure insert_random_orderDetails(i int)
 begin
+	-- contador de la cantidad de operaciones que se van a realizar
 	declare j int default 0;
+    -- varibles para valores random
 	declare idOrder int;
 	declare codeProduct char(12);
     declare precio decimal(6,2);
     
     while j<i do
+    -- seleccionar valores random de las tablas ya creadas
     select orderid into idOrder from orders
     order by rand() limit 1;
     
@@ -264,19 +273,13 @@ begin
     order by rand() limit 1;
     
     select price into precio from products where codeProduct=productCode;
-    
+    -- insertar valores random
     insert into order_details(orderId,productCode, quantity, price) values
 		(idOrder,codeProduct,floor(1 + (rand()*30)),precio);
 	set j=j+1;
     end while;
 end|
-
-delimiter ;
-
-call insert_random_customers(50);
-call insert_random_orders(300);
-call insert_random_orderDetails(5000);
-
+	
 delimiter $$
 -- Procedimiento para insertar clientes
 CREATE PROCEDURE InsertCustomer(
@@ -319,8 +322,12 @@ BEGIN
 END$$
 
 DELIMITER ;
+-- llamar los procedure's para ingresar valores
+call insert_random_customers(50);
+call insert_random_orders(300);
+call insert_random_orderDetails(5000);
 
-
+-- vistas de reporte de ventas por mes
 create view SalesReport_Junuary as
 select od.orderid as `num.Orden`, o.date as Fecha, c.nam as Cliente, e.nam as Empleado, count(od.total) as Total, count(od.orderid) as `cant.Detalles` from
 order_details od join orders o on o.orderid=od.orderid join customers c on c.customerid=o.customerid
