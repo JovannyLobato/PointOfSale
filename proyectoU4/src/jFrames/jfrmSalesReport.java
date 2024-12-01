@@ -45,11 +45,12 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtSales = new javax.swing.JTable();
         btnQuarterlySales = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnVentaPorEmpleado = new javax.swing.JButton();
         tfEmpleadoID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnVentaPorMes = new javax.swing.JButton();
         cbMes = new javax.swing.JComboBox<>();
+        btnBackToMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,7 +80,7 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtSales);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, 380));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, 350));
 
         btnQuarterlySales.setText("Quarterly Sales Report");
         btnQuarterlySales.addActionListener(new java.awt.event.ActionListener() {
@@ -89,13 +90,13 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         });
         jPanel2.add(btnQuarterlySales, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
 
-        jButton1.setText("Ventas por empleado");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVentaPorEmpleado.setText("Ventas por empleado");
+        btnVentaPorEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVentaPorEmpleadoActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+        jPanel2.add(btnVentaPorEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         tfEmpleadoID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,8 +108,13 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         jLabel1.setText("Empleado ID");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
 
-        jButton2.setText("Ventas por mes");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+        btnVentaPorMes.setText("Ventas por mes");
+        btnVentaPorMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVentaPorMesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnVentaPorMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "julio", "julio", "agosto", "noviembre", "diciembre", " " }));
         cbMes.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +123,15 @@ public class jfrmSalesReport extends javax.swing.JFrame {
             }
         });
         jPanel2.add(cbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+
+        btnBackToMenu.setBackground(new java.awt.Color(153, 102, 0));
+        btnBackToMenu.setText("Menu");
+        btnBackToMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackToMenuActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnBackToMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 120, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -154,9 +169,9 @@ public class jfrmSalesReport extends javax.swing.JFrame {
        
     }//GEN-LAST:event_btnQuarterlySalesActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVentaPorEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaPorEmpleadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnVentaPorEmpleadoActionPerformed
 
     private void tfEmpleadoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmpleadoIDActionPerformed
         // TODO add your handling code here:
@@ -165,6 +180,16 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     private void cbMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbMesActionPerformed
+
+    private void btnVentaPorMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaPorMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVentaPorMesActionPerformed
+
+    private void btnBackToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToMenuActionPerformed
+        jfrmMenu menuFrame = new jfrmMenu();
+        menuFrame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackToMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,11 +227,12 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackToMenu;
     private javax.swing.JButton btnExit1;
     private javax.swing.JButton btnQuarterlySales;
+    private javax.swing.JButton btnVentaPorEmpleado;
+    private javax.swing.JButton btnVentaPorMes;
     private javax.swing.JComboBox<String> cbMes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

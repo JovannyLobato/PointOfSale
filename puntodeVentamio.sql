@@ -69,7 +69,8 @@ CREATE TABLE order_details (
     price DECIMAL(6,2) NOT NULL, -- Precio del producto en el momento de la orden
     total DECIMAL(6,2) AS (price * quantity) STORED, -- Total calculado
     CONSTRAINT fk_OrderID FOREIGN KEY (OrderID)
-    REFERENCES orders(OrderID),
+    REFERENCES orders(OrderID)
+    on delete cascade, -- jovanny: i added this.
     CONSTRAINT fk_ProductCode FOREIGN KEY (ProductCode)
     REFERENCES products(ProductCode)
 );
@@ -429,3 +430,89 @@ order by p.nam;
 -- SELECT * FROM reporte_ventas_trimestrales;
 -- describe reporte_ventas_trimestrales;
 
+-- 7.- TRIGGERS DE AUDITORIA
+create table audit_orders (
+    auditid int auto_increment primary key,
+    orderid int,
+    accion varchar(10),
+    usuario varchar(100),
+    fecha datetime default current_timestamp,
+    detalles text
+);
+Delimiter $$
+-- TRIGGER DE INSERT
+create trigger trigger_audit_orders_insert
+after insert on orders
+for each row
+begin
+    insert into audit_orders (orderid, accion, usuario, detalles)
+    values (
+        new.orderid,
+        'insert',
+        user(),
+        concat('Nuevo pedido: fecha=', new.date, ', empleado=', new.employeeid, ', cliente=', new.customerid)
+    );
+end;
+-- TRIGGER DE UPDATE
+DELIMITER $$
+create trigger trigger_audit_orders_update
+after update on orders
+for each row
+begin
+    insert into audit_orders (orderid, accion, usuario, detalles)
+    VALUES (
+        new.orderid,
+        'update',
+        user(),
+        concat(
+            'Cambio en pedidoid=', old.orderid,
+            '. antes: fecha=', old.date, ', empleado=', old.employeeid, ', cliente=', old.customerid,
+            '. después: fecha=', new.date, ', empleado=', new.employeeid, ', cliente=', new.customerid
+        )
+    );
+end;
+-- TRIGGER DE DELETE
+DELIMITER $$
+create trigger trigger_audit_orders_delete
+after delete on orders
+for each row
+BEGIN
+    INSERT INTO audit_orders (orderid, accion, usuario, detalles)
+    Values (
+        old.orderid,
+        'delete',
+        USER(),
+        concat('pedido eliminado: fecha=', OLD.DATE, ', empleado=', OLD.employeeid, ', cliente=', OLD.customerid)
+    );
+END;
+DELIMITER ;
+-- SELECT * FROM audit_orders;
+-- delete from orders where OrderID = 292;
+-- SELECT * FROM orders;
+
+-- 9.- FUNCION QUE CALCULA LA CANTIDAD DE PRODUCTOS QUE TIENE UNA VENTA.
+Delimiter $$
+create function calcular_cantidad_productos(venta_id int) 
+returns int
+deterministic
+begin
+    declare cantidad_total int;
+	-- se cuantan cuantos productos hay en la venta con el id
+    select sum(quantity) 
+    into cantidad_total
+    from order_details
+    where orderid = venta_id;
+    -- si no hay productos, devolver 0
+    if cantidad_total is null then
+        set cantidad_total = 0;
+    end if;
+    return cantidad_total;
+end $$ 
+DELIMITER ;
+-- aqui me fijo cuantos productos tiene la venta con id=1
+-- select * from order_details where orderID=1;
+-- select * from products where ProductCode=934817842383;
+-- describe order_details;
+-- SELECT calcular_cantidad_productos(1);
+ -- FIN DEL ESPACIO DE TRABAJO DE JOVANNY, GRACIAS POR SU ATENCION.
+ 

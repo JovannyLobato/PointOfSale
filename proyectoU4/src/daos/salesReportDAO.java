@@ -22,7 +22,7 @@ public class salesReportDAO {
     public salesReportDAO(){
         
     }
-    public ArrayList<modReporteTrimestral> read(){
+    public ArrayList<modReporteTrimestral> readA(){
         ArrayList<modReporteTrimestral> list = new ArrayList<modReporteTrimestral>();
         try{
             //aqui defino la consulta
