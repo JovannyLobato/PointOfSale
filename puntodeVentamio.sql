@@ -427,5 +427,5 @@ group by p.nam
 order by p.nam;
 -- drop view reporte_ventas_trimestrales;
 -- SELECT * FROM reporte_ventas_trimestrales;
-describe reporte_ventas_trimestral;
+-- describe reporte_ventas_trimestrales;
 
