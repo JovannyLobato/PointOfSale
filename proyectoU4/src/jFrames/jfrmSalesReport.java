@@ -4,12 +4,21 @@
  */
 package jFrames;
 
+import daos.salesReportDAO;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import modelos.modReporteTrimestral;
+
 /**
  *
  * @author jovan
  */
 public class jfrmSalesReport extends javax.swing.JFrame {
 
+    salesReportDAO dao = new salesReportDAO();
+    
+    
     /**
      * Creates new form jfrmSalesReport
      */
@@ -35,6 +44,12 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         btnExit1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtSales = new javax.swing.JTable();
+        btnQuarterlySales = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        tfEmpleadoID = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        cbMes = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -64,7 +79,44 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jtSales);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 80, -1, -1));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, -1, 380));
+
+        btnQuarterlySales.setText("Quarterly Sales Report");
+        btnQuarterlySales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuarterlySalesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnQuarterlySales, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, -1, -1));
+
+        jButton1.setText("Ventas por empleado");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
+
+        tfEmpleadoID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfEmpleadoIDActionPerformed(evt);
+            }
+        });
+        jPanel2.add(tfEmpleadoID, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 80, -1));
+
+        jLabel1.setText("Empleado ID");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
+
+        jButton2.setText("Ventas por mes");
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
+
+        cbMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "enero", "febrero", "marzo", "abril", "mayo", "julio", "julio", "agosto", "noviembre", "diciembre", " " }));
+        cbMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbMesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cbMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -76,6 +128,43 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         this.dispose();
         System.exit(0);
     }//GEN-LAST:event_btnExit1ActionPerformed
+
+    private void btnQuarterlySalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuarterlySalesActionPerformed
+        // este evento es propiedad de jovanny
+        ArrayList<modReporteTrimestral> reportes = dao.read();
+        // Crear los encabezados de la tabla
+        String[] columnNames = {"Producto", "Trim 1", "Trim 2", "Trim 3", "Trim 4"};
+
+        // Crear el modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Llenar la tabla con los datos obtenidos
+        for (modReporteTrimestral reporte : reportes) {
+            model.addRow(new Object[] {
+                reporte.getProducto(),
+                reporte.getTrim1(),
+                reporte.getTrim2(),
+                reporte.getTrim3(),
+                reporte.getTrim4()
+            });
+        }
+        jtSales.setModel(model);
+        jScrollPane1.setVisible(true);
+        jtSales.setVisible(true);
+       
+    }//GEN-LAST:event_btnQuarterlySalesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tfEmpleadoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmpleadoIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfEmpleadoIDActionPerformed
+
+    private void cbMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbMesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,8 +203,14 @@ public class jfrmSalesReport extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit1;
+    private javax.swing.JButton btnQuarterlySales;
+    private javax.swing.JComboBox<String> cbMes;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtSales;
+    private javax.swing.JTextField tfEmpleadoID;
     // End of variables declaration//GEN-END:variables
 }

@@ -410,7 +410,22 @@ JOIN order_details od ON o.orderid = od.orderid JOIN employees e ON e.employeeid
 GROUP BY  o.employeeid, CONCAT(e.nam, ' ', e.surname) ORDER BY  `Total` DESC;
 
 
+-- espacio de trabajo de jovanny el más capito
+create view reporte_ventas_trimestrales as
+select 
+    p.nam as producto,
+    -- solo secciona entre trimestres
+    sum(case when month(o.date) between 1 and 3 then od.quantity else 0 end) as 'trim 1',
+    sum(case when month(o.date) between 4 and 6 then od.quantity else 0 end) as 'trim 2',
+    sum(case when month(o.date) between 7 and 9 then od.quantity else 0 end) as 'trim 3',
+    sum(case when month(o.date) between 10 and 12 then od.quantity else 0 end) as 'trim 4'
+from orders o 
+join order_details od on o.orderid = od.orderid
+join products p on od.productcode = p.productcode
+where year(o.date) = 2024
+group by p.nam 
+order by p.nam;
+-- drop view reporte_ventas_trimestrales;
+-- SELECT * FROM reporte_ventas_trimestrales;
+describe reporte_ventas_trimestral;
 
-
-
-select * from SalesReport_December;
