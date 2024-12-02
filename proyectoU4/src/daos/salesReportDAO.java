@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import modelos.modReporteMensual;
+import modelos.modReporteEmpleado;
 
 /**
  *
@@ -277,6 +278,29 @@ public class salesReportDAO {
                     break;
                     
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeesDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    
+    public ArrayList<modReporteEmpleado> readC() {
+        ArrayList<modReporteEmpleado> list = new ArrayList<modReporteEmpleado>();
+        try {
+            //aqui defino la consulta
+            String select = "select * from salesreport_byemployee;";
+            PreparedStatement ps = cx.conectar().prepareCall(select);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                modReporteEmpleado reporte = new modReporteEmpleado();
+                reporte.setEmpleado(rs.getString("Empleado"));
+                reporte.setTotal(rs.getDouble("Total"));
+                reporte.setCantVentas(rs.getInt("Cant. Ventas"));
+                list.add(reporte);
+            }
+            ps.close();
+            ps = null;
+            cx.desconectar();
         } catch (SQLException ex) {
             Logger.getLogger(EmployeesDAO.class.getName()).log(Level.SEVERE, null, ex);
         }

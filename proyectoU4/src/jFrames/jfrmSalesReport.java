@@ -10,6 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.modReporteTrimestral;
 import modelos.modReporteMensual;
+import modelos.modReporteEmpleado;
 
 /**
  *
@@ -47,7 +48,6 @@ public class jfrmSalesReport extends javax.swing.JFrame {
         jtSales = new javax.swing.JTable();
         btnQuarterlySales = new javax.swing.JButton();
         btnVentaPorEmpleado = new javax.swing.JButton();
-        tfEmpleadoID = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnVentaPorMes = new javax.swing.JButton();
         cbMes = new javax.swing.JComboBox<>();
@@ -98,15 +98,6 @@ public class jfrmSalesReport extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnVentaPorEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
-
-        tfEmpleadoID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfEmpleadoIDActionPerformed(evt);
-            }
-        });
-        jPanel2.add(tfEmpleadoID, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 80, -1));
-
-        jLabel1.setText("Empleado ID");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 60, -1, -1));
 
         btnVentaPorMes.setText("Ventas por mes");
@@ -171,12 +162,25 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuarterlySalesActionPerformed
 
     private void btnVentaPorEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaPorEmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVentaPorEmpleadoActionPerformed
+        ArrayList<modReporteEmpleado> reportes = dao.readC();
+        // Crear los encabezados de la tabla
+        String[] columnNames = {"Empleado", "Total", "Cant.Ventas"};
 
-    private void tfEmpleadoIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfEmpleadoIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfEmpleadoIDActionPerformed
+        // Crear el modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Llenar la tabla con los datos obtenidos
+        for (modReporteEmpleado reporte : reportes) {
+            model.addRow(new Object[] {
+                reporte.getEmpleado(),
+                reporte.getTotal(),
+                reporte.getCantVentas()
+            });
+        }
+        jtSales.setModel(model);
+        jScrollPane1.setVisible(true);
+        jtSales.setVisible(true);
+    }//GEN-LAST:event_btnVentaPorEmpleadoActionPerformed
 
     private void cbMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbMesActionPerformed
         // TODO add your handling code here:
@@ -258,6 +262,5 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jtSales;
-    private javax.swing.JTextField tfEmpleadoID;
     // End of variables declaration//GEN-END:variables
 }
