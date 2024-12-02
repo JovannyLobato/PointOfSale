@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import modelos.modReporteTrimestral;
+import modelos.modReporteMensual;
 
 /**
  *
@@ -146,7 +147,7 @@ public class jfrmSalesReport extends javax.swing.JFrame {
 
     private void btnQuarterlySalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuarterlySalesActionPerformed
         // este evento es propiedad de jovanny
-        ArrayList<modReporteTrimestral> reportes = dao.read();
+        ArrayList<modReporteTrimestral> reportes = dao.readA();
         // Crear los encabezados de la tabla
         String[] columnNames = {"Producto", "Trim 1", "Trim 2", "Trim 3", "Trim 4"};
 
@@ -182,7 +183,27 @@ public class jfrmSalesReport extends javax.swing.JFrame {
     }//GEN-LAST:event_cbMesActionPerformed
 
     private void btnVentaPorMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentaPorMesActionPerformed
-        // TODO add your handling code here:
+        ArrayList<modReporteMensual> reportes = dao.readB(cbMes.getSelectedIndex());
+        // Crear los encabezados de la tabla
+        String[] columnNames = {"Num.Orden", "Fecha", "Cliente", "Emleado", "Total", "Cant.Detalles"};
+
+        // Crear el modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+        // Llenar la tabla con los datos obtenidos
+        for (modReporteMensual reporte : reportes) {
+            model.addRow(new Object[] {
+                reporte.getNumOrden(),
+                reporte.getFecha(),
+                reporte.getCliente(),
+                reporte.getEmpleado(),
+                reporte.getTotal(),
+                reporte.getCantDetalles()
+            });
+        }
+        jtSales.setModel(model);
+        jScrollPane1.setVisible(true);
+        jtSales.setVisible(true);
     }//GEN-LAST:event_btnVentaPorMesActionPerformed
 
     private void btnBackToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToMenuActionPerformed
