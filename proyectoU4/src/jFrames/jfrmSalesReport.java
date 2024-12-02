@@ -146,7 +146,7 @@ public class jfrmSalesReport extends javax.swing.JFrame {
 
     private void btnQuarterlySalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuarterlySalesActionPerformed
         // este evento es propiedad de jovanny
-        ArrayList<modReporteTrimestral> reportes = dao.read();
+        ArrayList<modReporteTrimestral> reportes = dao.readA();
         // Crear los encabezados de la tabla
         String[] columnNames = {"Producto", "Trim 1", "Trim 2", "Trim 3", "Trim 4"};
 
